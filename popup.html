@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="bootstrap.css" crossorigin="anonymous">
+	<script src="bootstrap.js" crossorigin="anonymous"></script>
+	<link href="fontawesome.min.css" rel="stylesheet">
+	<script src="fontawesome.min.js"></script>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<link rel="icon" type="image/png" href="logo.png" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="moment.js"></script>
+	<script src="popup.js"></script>
+</head>
+<div id="app">
+
+	<body>
+		<div class="container text-center">
+			<div class="row">
+				<div class="input-group m-1" style="cursor: pointer;">
+					<a :href="socials.youtube" target="_blank"><img src="logo.png" alt="TheLoFiWiFiStation" width="150"
+							height="150"></a>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16"
+						@click="toggleVideo('pause')">
+						<path
+							d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
+					</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16"
+						@click="toggleVideo('play')">
+						<path
+							d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+					</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-stop" viewBox="0 0 16 16"
+						@click="toggleVideo('stop')">
+						<path
+							d="M3.5 5A1.5 1.5 0 0 1 5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5zM5 4.5a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V5a.5.5 0 0 0-.5-.5H5z" />
+					</svg>
+				</div>
+				<div class="position-relative musicStatus" style="bottom: 50px; left: 95px">
+					<div class="position-absolute end-50">{{musicStatus}}<span>...</span></div>
+				</div>
+				<div class="position-relative nowPlaying" style="bottom: 30px; left: 140px"
+					v-if="musicStatus == 'Playing'">
+					<div class="position-absolute end-50">{{nowPlaying}}</div>
+				</div>
+				<div class="form-group p-2">
+					<a :href="socials.youtube" target="_blank" class="fa fa-youtube"></a>
+					<a :href="socials.soundcloud" target="_blank" class="fa fa-soundcloud"
+						style="padding-left: 7px;"></a>
+					<a :href="socials.spotify" target="_blank" class="fa fa-spotify"></a>
+					<a :href="socials.instagram" target="_blank" class="fa fa-instagram"></a>
+					<a :href="socials.twitter" target="_blank" class="fa fa-twitter"></a>
+				</div>
+				<div class="form-group mb-1">
+
+				</div>
+				<div class="col-xs-12 mb-2">
+					<ul class="list-group shadow-lg">
+						<li class="list-group-item" v-for="video in youtubeVideos">
+							<a :href="'https://www.youtube.com/watch?v='+video.videoId" target="_blank"
+								class="">{{video.name}}
+							</a>
+						</li>
+					</ul>
+				</div>
+				<iframe class="yt_player_iframe" width="0" height="0"
+					src="http://www.youtube.com/embed/hDXYlmGV_NY?autoplay=1&enablejsapi=1&version=3&playerapiid=ytplayer"
+					allowfullscreen="false" allowscriptaccess="always" frameborder="0"></iframe>
+			</div>
+			<!-- <div class="row">
+				<h5 class="text-muted">Soundcloud Scraper</h5>
+				<div class="input-group mb-1">
+					<input v-model="playListURL" class="form-control" />
+					<button type="button" @click="scPlaylist" id="scrape" class="input-group-text">Playlist</button>
+				</div>
+				<div class="input-group mb-1">
+					<input v-model="userURL" class="form-control" />
+					<button type="button" @click="scUser" id="scUser" class="input-group-text">User</button>
+				</div>
+				<div class="input-group mb-1">
+					<input v-model="ytVideosURL" class="form-control" />
+					<button type="button" @click="ytVideos" id="ytVideos" class="input-group-text">ytVideos</button>
+				</div>
+				<div id="player"></div>
+			</div> -->
+
+		</div>
+	</body>
+
+</div>
+
+</html>
+<style type="text/css">
+	::-webkit-scrollbar {
+		width: 12px;
+	}
+
+	::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(200, 200, 200, 1);
+		border-radius: 5px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 5px;
+		background-color: rgb(59, 181, 211);
+		-webkit-box-shadow: inset 0 0 6px rgba(90, 90, 90, 0.7);
+	}
+
+	html {
+		overflow: scroll;
+		overflow-y: auto;
+	}
+
+	body {
+		height: 100%;
+		width: 400px;
+		background-color: rgba(80, 252, 255, 0.753);
+	}
+
+	.btn {
+		border-radius: 20px;
+	}
+
+	.musicStatus {
+		font-size: 11px;
+	}
+
+	.nowPlaying {
+		font-size: 11px;
+
+	}
+
+	.bi {
+		text-decoration: none;
+		width: 20%;
+	}
+
+	.bi:hover {
+		opacity: 0.7;
+		text-decoration: none;
+	}
+
+	.fa {
+		padding: 10px;
+		font-size: 25px;
+		text-decoration: none;
+		border-radius: 50%;
+		width: 12%;
+	}
+
+	.fa:hover {
+		opacity: 0.7;
+		text-decoration: none;
+		color: white;
+	}
+
+	.fa-instagram {
+		background: #f09433;
+		color: white;
+		background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+		background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+		background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+	}
+
+	.fa-twitter {
+		background: #55ACEE;
+		color: white;
+	}
+
+	.fa-youtube {
+		background: #f00;
+		color: white;
+	}
+
+	.fa-spotify {
+		background: #1db954;
+		color: white;
+	}
+
+	.fa-soundcloud {
+		background: #ff6900;
+		color: white;
+	}
+
+	.links a {
+		margin: 2px;
+		width: 80%;
+	}
+
+	.list-group {
+		max-height: 280px;
+		overflow: scroll;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+</style>

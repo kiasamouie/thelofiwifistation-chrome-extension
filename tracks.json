@@ -1,0 +1,1370 @@
+[
+  {
+    "artwork_url": "https://i1.sndcdn.com/artworks-xqPVX5MdJkQQBMBT-yJA4uw-large.jpg",
+    "caption": null,
+    "commentable": true,
+    "comment_count": 0,
+    "created_at": "2022-01-20T20:00:49Z",
+    "description": "",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 145894,
+    "full_duration": 145894,
+    "embeddable_by": "all",
+    "genre": "Persian Trap Music",
+    "has_downloads_left": false,
+    "id": 1200320254,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2022-01-24T21:57:15Z",
+    "license": "all-rights-reserved",
+    "likes_count": 1,
+    "permalink": "ethnictrap",
+    "permalink_url": "https://soundcloud.com/thekiadoe/ethnictrap",
+    "playback_count": 18,
+    "public": true,
+    "publisher_metadata": {
+      "id": 1200320254,
+      "urn": "soundcloud:tracks:1200320254",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "",
+    "title": "Ethnicity",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/1200320254",
+    "urn": "soundcloud:tracks:1200320254",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/F0XhxhHlaaol_m.json",
+    "display_date": "2022-01-20T20:00:49Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1200320254/1c8d09c8-9b73-4d55-8993-95b432075850/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 145894,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1200320254/1c8d09c8-9b73-4d55-8993-95b432075850/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 145894,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1200320254/4d0811ef-57ad-477c-9c7a-76db2afa139e/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 145874,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:1200320254",
+    "station_permalink": "track-stations:1200320254",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6IjE4YjJjNjk5LTM0N2MtNGEwOS1iMTVjLTkwMThlMmE4ZjgxMiIsImlhdCI6MTY0MzQ3ODA4MX0.ELIMdjVc0JK3TFFmNIgayUM7U8owlBSoPu7-_Jx3PGw",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 0,
+    "created_at": "2022-01-18T17:42:45Z",
+    "description": "Welcome to Da OldSkool 🤖",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 86465,
+    "full_duration": 86465,
+    "embeddable_by": "all",
+    "genre": "Hybrid Trap",
+    "has_downloads_left": false,
+    "id": 1198840651,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2022-01-19T14:12:48Z",
+    "license": "all-rights-reserved",
+    "likes_count": 1,
+    "permalink": "oldskool",
+    "permalink_url": "https://soundcloud.com/thekiadoe/oldskool",
+    "playback_count": 6,
+    "public": true,
+    "publisher_metadata": {
+      "id": 1198840651,
+      "urn": "soundcloud:tracks:1198840651",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "Electronic Trap HybridTrap Vocodex",
+    "title": "OldSkool",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/1198840651",
+    "urn": "soundcloud:tracks:1198840651",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/6DtbJu1BTlLM_m.json",
+    "display_date": "2022-01-18T17:42:45Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1198840651/edefe619-db7f-4315-b180-f282b0b2d3ab/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 86465,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1198840651/edefe619-db7f-4315-b180-f282b0b2d3ab/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 86465,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1198840651/04ebd861-a2b4-44b0-8af3-aa8a7e33ac96/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 86446,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:1198840651",
+    "station_permalink": "track-stations:1198840651",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6ImE0YmVjZTUxLThiNjctNGZlOS04MDI3LWI3YjJmNzRiNDJlMyIsImlhdCI6MTY0MzQ3ODA4MX0.L5RM-YBEuUZVw02Gfgvyc997yRstdSJfuPQx_ftrJpg",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 1,
+    "created_at": "2021-11-26T19:24:02Z",
+    "description": "",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 140173,
+    "full_duration": 140173,
+    "embeddable_by": "all",
+    "genre": "Persian Trap Music",
+    "has_downloads_left": false,
+    "id": 1167377329,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2021-11-27T09:12:09Z",
+    "license": "all-rights-reserved",
+    "likes_count": 0,
+    "permalink": "goodbye",
+    "permalink_url": "https://soundcloud.com/thekiadoe/goodbye",
+    "playback_count": 40,
+    "public": true,
+    "publisher_metadata": {
+      "id": 1167377329,
+      "urn": "soundcloud:tracks:1167377329",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "Trap Growl Hey \"ComeOn \" Perisan MiddleEasten",
+    "title": "Goodbye",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/1167377329",
+    "urn": "soundcloud:tracks:1167377329",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/Pv9PguP1umci_m.json",
+    "display_date": "2021-11-26T19:24:02Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1167377329/7a87b441-5159-49da-b98e-fb84d402e930/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 140173,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1167377329/7a87b441-5159-49da-b98e-fb84d402e930/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 140173,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1167377329/70bdd4e8-809f-45b4-969b-7b0731224b5d/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 140153,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:1167377329",
+    "station_permalink": "track-stations:1167377329",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6IjEzODU4NTI2LTI3ZGQtNDM2OS04ZDgzLWIxYTk3YTFkZTM2ZCIsImlhdCI6MTY0MzQ3ODA4MX0.KOYzh77B0So2E8548KLzkirIrvIcgG60LKR20-cZohY",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 0,
+    "created_at": "2021-11-24T18:14:29Z",
+    "description": "DATS ME :D",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 112065,
+    "full_duration": 112065,
+    "embeddable_by": "all",
+    "genre": "Persian Trap Music",
+    "has_downloads_left": false,
+    "id": 1166082340,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2022-01-11T12:39:30Z",
+    "license": "all-rights-reserved",
+    "likes_count": 1,
+    "permalink": "thekiadoe",
+    "permalink_url": "https://soundcloud.com/thekiadoe/thekiadoe",
+    "playback_count": 19,
+    "public": true,
+    "publisher_metadata": {
+      "id": 1166082340,
+      "urn": "soundcloud:tracks:1166082340",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "Growl SubBass Bass Persian \"Middle Eastern\"",
+    "title": "TheKiaDoe",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/1166082340",
+    "urn": "soundcloud:tracks:1166082340",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/6YSRp0EqfL5Y_m.json",
+    "display_date": "2021-11-24T18:14:29Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1166082340/5277f02f-e4b7-413f-ace3-30f80507dd03/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 112065,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1166082340/5277f02f-e4b7-413f-ace3-30f80507dd03/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 112065,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1166082340/d213c1b3-cabf-4ebc-b5c9-82ae64c9ad0e/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 112046,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:1166082340",
+    "station_permalink": "track-stations:1166082340",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6IjUyM2I5OGNlLTI2MGMtNDY1Yy04NjA5LWIwMWYzNzM2MTE3NyIsImlhdCI6MTY0MzQ3ODA4MX0.utiFNZSEYVt3uVwUB38D1Wh9lv0UtuPfDuq_w1SDhJg",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 1,
+    "created_at": "2021-11-17T17:51:00Z",
+    "description": "",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 54073,
+    "full_duration": 54073,
+    "embeddable_by": "all",
+    "genre": "Doestep",
+    "has_downloads_left": false,
+    "id": 1161966205,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2021-11-17T17:51:00Z",
+    "license": "all-rights-reserved",
+    "likes_count": 2,
+    "permalink": "pblatxmevo1p",
+    "permalink_url": "https://soundcloud.com/thekiadoe/pblatxmevo1p",
+    "playback_count": 12,
+    "public": true,
+    "publisher_metadata": {
+      "id": 1161966205,
+      "urn": "soundcloud:tracks:1161966205",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "Trap Bass SubBass Robot Growl FM",
+    "title": "🤖",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/1161966205",
+    "urn": "soundcloud:tracks:1161966205",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/IiMv4h0uoLrb_m.json",
+    "display_date": "2021-11-17T17:51:00Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1161966205/b874c376-5949-467f-a61e-36eda1065192/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 54073,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1161966205/b874c376-5949-467f-a61e-36eda1065192/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 54073,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1161966205/31ec3bb0-6ea8-4b87-aa8f-acfad005ebe0/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 54054,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:1161966205",
+    "station_permalink": "track-stations:1161966205",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6ImM5MzFkN2VlLWNmMjktNDQ0My04M2EzLTRmOTEwNGJlMThhMCIsImlhdCI6MTY0MzQ3ODA4MX0.uU7vfs0XpR2i2M5UlyszmmZ8IAxSk_TMrjubNpk3Baw",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 0,
+    "created_at": "2021-11-12T18:37:16Z",
+    "description": "My love for the F# Minor scale and singing Robots\nA 90's video game themed song. The boss is a Middle Eastern Robot 🤪🤖",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 118073,
+    "full_duration": 118073,
+    "embeddable_by": "all",
+    "genre": "Persian Trap Music",
+    "has_downloads_left": false,
+    "id": 1158968563,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2021-11-18T15:58:20Z",
+    "license": "all-rights-reserved",
+    "likes_count": 0,
+    "permalink": "bossmusik",
+    "permalink_url": "https://soundcloud.com/thekiadoe/bossmusik",
+    "playback_count": 25,
+    "public": true,
+    "publisher_metadata": {
+      "id": 1158968563,
+      "urn": "soundcloud:tracks:1158968563",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "Growl Bass SubBass FM Perisan \"Middle Eastern\"",
+    "title": "BossMusik",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/1158968563",
+    "urn": "soundcloud:tracks:1158968563",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/Ks6eFSTjpw1q_m.json",
+    "display_date": "2021-11-12T18:37:16Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1158968563/c96cdaeb-b37c-4e5a-bb23-deeedf4c7b66/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 118073,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1158968563/c96cdaeb-b37c-4e5a-bb23-deeedf4c7b66/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 118073,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1158968563/e914eec0-2446-4673-bcac-292e3ac4d2c9/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 118054,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:1158968563",
+    "station_permalink": "track-stations:1158968563",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6ImIxZDBiMGMwLTFmY2ItNGYwNi1hNGMyLTBiY2FhODg0ZjM3MSIsImlhdCI6MTY0MzQ3ODA4MX0.lOzgpnQny1e6jxbKJ1emyuEPKu_4IhMYNlrG2fNztZU",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 0,
+    "created_at": "2021-05-25T19:23:15Z",
+    "description": "",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 84846,
+    "full_duration": 84846,
+    "embeddable_by": "all",
+    "genre": "Trap",
+    "has_downloads_left": false,
+    "id": 1055563771,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2021-08-21T16:49:42Z",
+    "license": "all-rights-reserved",
+    "likes_count": 2,
+    "permalink": "rollin-doe-trap",
+    "permalink_url": "https://soundcloud.com/thekiadoe/rollin-doe-trap",
+    "playback_count": 19,
+    "public": true,
+    "publisher_metadata": {
+      "id": 1055563771,
+      "urn": "soundcloud:tracks:1055563771",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "",
+    "title": "Rollin Doe",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/1055563771",
+    "urn": "soundcloud:tracks:1055563771",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/e8DnInHLsuQq_m.json",
+    "display_date": "2021-05-25T19:23:15Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1055563771/ec359bc1-b7ba-4987-8894-2164b3d1fd25/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 84846,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1055563771/ec359bc1-b7ba-4987-8894-2164b3d1fd25/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 84846,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1055563771/d87ba344-b1a0-446a-b860-ea6c51eaeaf9/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 84826,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:1055563771",
+    "station_permalink": "track-stations:1055563771",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6ImFhMzNhYWZiLTM1YTQtNDcyMS05MGZlLTAxZTEwNTZkNzM5OSIsImlhdCI6MTY0MzQ3ODA4MX0.oq_P5yqdhMgoK0lhWblscpN8JN9XZ8X0B6cm2d8YjxI",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 1,
+    "created_at": "2021-05-02T16:42:07Z",
+    "description": "",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 60082,
+    "full_duration": 60082,
+    "embeddable_by": "all",
+    "genre": "",
+    "has_downloads_left": false,
+    "id": 1041166048,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2021-05-26T08:29:21Z",
+    "license": "all-rights-reserved",
+    "likes_count": 1,
+    "permalink": "spookey",
+    "permalink_url": "https://soundcloud.com/thekiadoe/spookey",
+    "playback_count": 7,
+    "public": true,
+    "publisher_metadata": {
+      "id": 1041166048,
+      "urn": "soundcloud:tracks:1041166048",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "",
+    "title": "Spookey",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/1041166048",
+    "urn": "soundcloud:tracks:1041166048",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/wQlB5K3v7ehH_m.json",
+    "display_date": "2021-05-02T16:42:07Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1041166048/5b5096cc-cc8d-4b3a-b713-9b28c44e8f11/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 60082,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1041166048/5b5096cc-cc8d-4b3a-b713-9b28c44e8f11/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 60082,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1041166048/35379fb6-a95c-4bba-8f68-126fa6ffdca1/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 60062,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:1041166048",
+    "station_permalink": "track-stations:1041166048",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6IjAwNWE1OWUzLTYwZGMtNGU2NS1hNDZmLTQzODkyMTJlYjZmMCIsImlhdCI6MTY0MzQ3ODA4MX0.wgRDR7P8mfCiahpk3qMYoVzpC2eDlWkDGKRM43V2DLE",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 0,
+    "created_at": "2021-04-19T20:40:07Z",
+    "description": "",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 83226,
+    "full_duration": 83226,
+    "embeddable_by": "all",
+    "genre": "Riddim",
+    "has_downloads_left": false,
+    "id": 1032737263,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2021-08-17T21:33:45Z",
+    "license": "all-rights-reserved",
+    "likes_count": 2,
+    "permalink": "camel-camel",
+    "permalink_url": "https://soundcloud.com/thekiadoe/camel-camel",
+    "playback_count": 19,
+    "public": true,
+    "publisher_metadata": {
+      "id": 1032737263,
+      "urn": "soundcloud:tracks:1032737263",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "\"Growl \" Bass EasternRiddim \"Dubstep \" MiddleEast 140 140BPM",
+    "title": "🐫🐪🐫🐪🐫🐪",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/1032737263",
+    "urn": "soundcloud:tracks:1032737263",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/TqxN5lM3rVM6_m.json",
+    "display_date": "2021-04-19T20:40:07Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1032737263/9875c054-a253-412b-bab5-56042e54bde9/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 83226,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1032737263/9875c054-a253-412b-bab5-56042e54bde9/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 83226,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1032737263/13267349-a68d-42c3-919c-82208e290b85/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 83207,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:1032737263",
+    "station_permalink": "track-stations:1032737263",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6Ijg4ZDcwZmMzLTIzZWMtNDNkOC1hOWJlLWJiNGFjYWNkMzgwNyIsImlhdCI6MTY0MzQ3ODA4MX0.v3NZuULr5qzePBK2wiiWbmK37eAirQM_qJhj2UDt41w",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 0,
+    "created_at": "2021-03-19T23:15:18Z",
+    "description": "",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 49319,
+    "full_duration": 49319,
+    "embeddable_by": "all",
+    "genre": "Trap",
+    "has_downloads_left": false,
+    "id": 1011515467,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2021-03-20T09:15:55Z",
+    "license": "all-rights-reserved",
+    "likes_count": 1,
+    "permalink": "happy-clouds",
+    "permalink_url": "https://soundcloud.com/thekiadoe/happy-clouds",
+    "playback_count": 15,
+    "public": true,
+    "publisher_metadata": {
+      "id": 1011515467,
+      "urn": "soundcloud:tracks:1011515467",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "",
+    "title": "Happy Clouds",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/1011515467",
+    "urn": "soundcloud:tracks:1011515467",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/flw9PtuDewux_m.json",
+    "display_date": "2021-03-19T23:15:18Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1011515467/c5d932de-0224-46c7-a7bb-6db1b3c5ce7c/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 49319,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1011515467/c5d932de-0224-46c7-a7bb-6db1b3c5ce7c/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 49319,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:1011515467/f7c0d56b-7964-4296-89f4-925cce10cbb1/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 49300,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:1011515467",
+    "station_permalink": "track-stations:1011515467",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6IjQ2MTEwZWJlLWQ3MTQtNDU2ZS05MzNmLTE1ZDJkNTE0NmQ4MiIsImlhdCI6MTY0MzQ3ODA4MX0.de7SFpW_wP_TiB6EVlRM5fiYCDqih65kCXH8HzsdC_8",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 2,
+    "created_at": "2021-01-01T13:05:15Z",
+    "description": "Had some fun with an Asadi sample all credits to him",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 131918,
+    "full_duration": 131918,
+    "embeddable_by": "all",
+    "genre": "Persian Trap Music",
+    "has_downloads_left": false,
+    "id": 957624238,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2021-08-17T21:21:54Z",
+    "license": "all-rights-reserved",
+    "likes_count": 8,
+    "permalink": "immortal-doe",
+    "permalink_url": "https://soundcloud.com/thekiadoe/immortal-doe",
+    "playback_count": 188,
+    "public": true,
+    "publisher_metadata": {
+      "id": 957624238,
+      "urn": "soundcloud:tracks:957624238",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "\"Middle Eastern\" Asadi TheImmortalAsadi PersianTrap Persian Sample Riddim Dubstep Remix",
+    "title": "The Immortal Doe",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/957624238",
+    "urn": "soundcloud:tracks:957624238",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/UdHB2iSFGdut_m.json",
+    "display_date": "2021-01-01T13:05:15Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:957624238/80338773-d7ed-4923-b292-1227f899fc38/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 131918,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:957624238/80338773-d7ed-4923-b292-1227f899fc38/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 131918,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:957624238/93218a98-0e19-45d7-a446-49f2bfa208d3/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 131899,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:957624238",
+    "station_permalink": "track-stations:957624238",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6IjAzODU4NjcxLTZkYWUtNGNmMS05OWE0LWVmNGU2ZWE0NDUwNiIsImlhdCI6MTY0MzQ3ODA4MX0.RUUAIMn0HSFrtV_0lIvgWbCdKQp-ItBi1fZZdheY51A",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  },
+  {
+    "artwork_url": null,
+    "caption": null,
+    "commentable": true,
+    "comment_count": 1,
+    "created_at": "2020-11-16T21:33:34Z",
+    "description": "",
+    "downloadable": false,
+    "download_count": 0,
+    "duration": 64993,
+    "full_duration": 64993,
+    "embeddable_by": "all",
+    "genre": "Trap",
+    "has_downloads_left": false,
+    "id": 930487537,
+    "kind": "track",
+    "label_name": null,
+    "last_modified": "2020-12-15T11:59:11Z",
+    "license": "all-rights-reserved",
+    "likes_count": 3,
+    "permalink": "doetrap2",
+    "permalink_url": "https://soundcloud.com/thekiadoe/doetrap2",
+    "playback_count": 42,
+    "public": true,
+    "publisher_metadata": {
+      "id": 930487537,
+      "urn": "soundcloud:tracks:930487537",
+      "contains_music": true
+    },
+    "purchase_title": null,
+    "purchase_url": null,
+    "release_date": null,
+    "reposts_count": 0,
+    "secret_token": null,
+    "sharing": "public",
+    "state": "finished",
+    "streamable": true,
+    "tag_list": "Trap Electronic Bass Bassline Grime Hey Word",
+    "title": "Doe Trap",
+    "track_format": "single-track",
+    "uri": "https://api.soundcloud.com/tracks/930487537",
+    "urn": "soundcloud:tracks:930487537",
+    "user_id": 66593390,
+    "visuals": null,
+    "waveform_url": "https://wave.sndcdn.com/cCX0B2SCBDXQ_m.json",
+    "display_date": "2020-11-16T21:33:34Z",
+    "media": {
+      "transcodings": [
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:930487537/645d3be8-01d7-4dc5-9803-9c2e00594cf8/stream/hls",
+          "preset": "mp3_0_1",
+          "duration": 64993,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:930487537/645d3be8-01d7-4dc5-9803-9c2e00594cf8/stream/progressive",
+          "preset": "mp3_0_1",
+          "duration": 64993,
+          "snipped": false,
+          "format": {
+            "protocol": "progressive",
+            "mime_type": "audio/mpeg"
+          },
+          "quality": "sq"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/media/soundcloud:tracks:930487537/055913d3-47f8-4c73-8bb2-c218f8a0e207/stream/hls",
+          "preset": "opus_0_0",
+          "duration": 64973,
+          "snipped": false,
+          "format": {
+            "protocol": "hls",
+            "mime_type": "audio/ogg; codecs=\"opus\""
+          },
+          "quality": "sq"
+        }
+      ]
+    },
+    "station_urn": "soundcloud:system-playlists:track-stations:930487537",
+    "station_permalink": "track-stations:930487537",
+    "track_authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJHQiIsInN1YiI6IiIsInJpZCI6IjY0ZWVkZWNjLTVlYzItNGRlYi1iNjRkLTJkZmU0YzMxZGIyZiIsImlhdCI6MTY0MzQ3ODA4MX0.cRSvDTZIZeJET23_03MXjWSHPBCVxrPD6ilOSNLxXUY",
+    "monetization_model": "BLACKBOX",
+    "policy": "MONETIZE",
+    "user": {
+      "avatar_url": "https://i1.sndcdn.com/avatars-yzo2ioiqBnSEFh8y-WTVzMQ-large.jpg",
+      "first_name": "",
+      "followers_count": 17,
+      "full_name": "",
+      "id": 66593390,
+      "kind": "user",
+      "last_modified": "2022-01-24T09:28:40Z",
+      "last_name": "",
+      "permalink": "thekiadoe",
+      "permalink_url": "https://soundcloud.com/thekiadoe",
+      "uri": "https://api.soundcloud.com/users/66593390",
+      "urn": "soundcloud:users:66593390",
+      "username": "TheKiaDoe",
+      "verified": false,
+      "city": null,
+      "country_code": null,
+      "badges": {
+        "pro": false,
+        "pro_unlimited": false,
+        "verified": false
+      },
+      "station_urn": "soundcloud:system-playlists:artist-stations:66593390",
+      "station_permalink": "artist-stations:66593390"
+    }
+  }
+]
