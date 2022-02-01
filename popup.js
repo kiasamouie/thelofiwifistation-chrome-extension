@@ -74,6 +74,8 @@ $(document).ready(function () {
       ]
     )
   })
+  $('.musicStatus p').text(musicStatus)
+  $('.logo').attr('href', socials.youtube)
   $('.playlistScraper input').val(playListURL)
   $('.userScraper input').val(userURL)
   $('.playlistScraper button').click(function () {
@@ -82,8 +84,6 @@ $(document).ready(function () {
   $('.userScraper button').click(function () {
     scUser()
   })
-  $('.musicStatus p').text(musicStatus)
-  $('.logo').attr('href', socials.youtube)
 })
 
 function showHideField (field, bool) {
