@@ -1,245 +1,195 @@
-function ScrapePlaylistData () {
-  // chrome.tabs.query({ currentWindow: true, active: true }, function (
-  //   tabs
-  // ) {
-  //   var activeTab = $.grep(tabs, function (tab) {
-  //     return tab.active
-  //   })[0]
-  //   console.log(chrome)
-  //   chrome.tabs.sendMessage(tabs[0].id, {
-  //     message: 'scrape'
-  //   })
-  // })
-  // chrome.tabs.query({currentWindow: true}, function (tabs){
-  //     var activeTab = $.grep(tabs, function(tab){ return tab.active })[0];
-  //     chrome.tabs.sendMessage(activeTab.id, {"message": "check-background", "tabs": tabs});
-  // 	if(tabs.length >= 3){
-  //     }
-  // });
-  // chrome.history.search({text: ''}, function(history) {
-  //     history.forEach(function(page) {
-  //         console.log(page.url);
-  //     });
-  // });
-  // chrome.runtime.onMessage.addListener(
-  //     function(request, sender, sendResponse) {
-  //         if (request.msg === "something_completed") {
-  //             //  To do something
-  //         }
-  //     }
-  // );
-  // var variable
-  // $.getJSON('.json', function (json) {
-  //   variable = json
-  // })
-  // function getData () {
-  //   $.each(array, function (k, t) {})
-  // }
-  // data = responseJSON.users
-  // const a = document.createElement('a')
-  // a.href = URL.createObjectURL(
-  //   new Blob([JSON.stringify(data, null, 2)], { type: 'text/plain' })
-  // )
-  // a.setAttribute('download', 'followers.json')
-  // document.body.appendChild(a)
-  // a.click()
-  // document.body.removeChild(a)
-  // function clearLocalStroage () {
-  //   localStorage.clear()
-  // }
-  // const functions = new Proxy(
-  //   { getData, clearLocalStroage, exportFollowers2json },
-  //   {
-  //     get () {
-  //       console.clear()
-  //       return Reflect.get(...arguments)
-  //     }
-  //   }
-  // )
-  // var codes = [
-  //   { code: keyCodes.c, func: null },
-  //   { code: keyCodes.s, func: null }
-  // ]
-  // var buttons = [
-  //   {
-  //     id: 'followers',
-  //     func: null,
-  //     value: 0,
-  //     pos: 'left'
-  //   },
-  //   { id: 'clear', func: null, value: 0, pos: 'right' }
-  // ]
-  // function createHeader () {
-  //   $.each(buttons, function (i, b) {
-  //     $('.header').after(
-  //       $('<div/>', { class: 'pull-' + b.pos + ' ' + b.id }).append(
-  //       )
-  //     )
-  //   })
-  // }
-  // $(document).keyup(function (e) {
-  //   if (e.altKey) {
-  //     $.each(codes, function (i, c) {
-  //       if ($.inArray(c.code, [e.keyCode, e.which]) !== -1) c.func()
-  //     })
-  //   }
-  // })
-}
-
 // chrome.runtime.getBackgroundPage(function (backgroundPage) {
 //   console.log(backgroundPage)
 // })
-
 $.ajaxSetup({ async: false })
 var today = moment().format('DD/MM/YYYY')
-var scPlaylistTracks = []
-
 var interval = setInterval(function () {
   var momentNow = moment()
-  $('#time-part').html(momentNow.format('DD/MM/YYYY - hh:mm:ss A'))
+  $('#date').html(momentNow.format('dddd, MMMM Do YYYY '))
+  $('#time').html(momentNow.format('hh:mm:ss A'))
 }, 100)
+var scPlaylistTracks = []
+var musicStatus = 'Playing'
+var nowPlaying = null
+var playListURL =
+  'https://soundcloud.com/sebastian-lopez-49626625/sets/lofi-remixes'
+var userURL = 'https://soundcloud.com/thekiadoe'
+var ytVideosURL = 'https://www.youtube.com/c/THELOFIWIFISTATION/videos'
+var socials = {
+  youtube: 'https://www.youtube.com/c/THELOFIWIFISTATION',
+  soundcloud: 'https://soundcloud.com/thelofiwifistation',
+  spotify: 'https://open.spotify.com/playlist/7AbkW3uVMBclLgt7dG7jS2',
+  instagram: 'https://www.instagram.com/thelofiwifistation',
+  twitter: 'https://twitter.com/LofiWifiStation'
+}
+var youtubeVideos = []
+var souncloudData = []
+var musicButtons = [
+  { action: 'stop', status: 'Stopped' },
+  { action: 'play', status: 'Playing' },
+  { action: 'pause', status: 'Paused' }
+]
 
 $(document).ready(function () {
-  var vm = new Vue({
-    el: '#app',
-    data: {
-      today: today,
-      showSC: false,
-      musicStatus: 'Playing',
-      nowPlaying: null,
-      playListURL:
-        'https://soundcloud.com/sebastian-lopez-49626625/sets/lofi-remixes',
-
-      userURL: 'https://soundcloud.com/thekiadoe',
-      ytVideosURL: 'https://www.youtube.com/c/THELOFIWIFISTATION/videos',
-      socials: {
-        youtube: 'https://www.youtube.com/c/THELOFIWIFISTATION',
-        soundcloud: 'https://soundcloud.com/thelofiwifistation',
-        spotify: 'https://open.spotify.com/playlist/7AbkW3uVMBclLgt7dG7jS2',
-        instagram: 'https://www.instagram.com/thelofiwifistation',
-        twitter: 'https://twitter.com/LofiWifiStation'
-      },
-      youtubeVideos: [],
-      souncloudData: [],
-      musicButtons: [
-        { action: 'stop', status: 'Stopped' },
-        { action: 'play', status: 'Playing' },
-        { action: 'pause', status: 'Paused' }
-      ]
-    },
-    methods: {
-      toggleSC: function (event) {
-        console.log()
-        $('.list-group').css({ 'max-height': '257px' })
-      },
-      myTracks: function () {
-        $.get(
-          'https://api-v2.soundcloud.com/users/66593390/tracks?representation=&client_id=sqBVzKo4j9IoDkrB4lo2LJsSmZtfmUp5&limit=20&offset=0&linked_partitioning=1&app_version=1643299901&app_locale=en',
-          function (res, status) {
-            console.log(res.collection)
-          }
-        )
-      },
-      ytVideos: function (url) {
-        $.get(vm.ytVideosURL, function (data, status) {
-          let youtubeVideos = $.map(
-            getData(data, 32, 'var ytInitialData = ').contents
-              .twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content
-              .sectionListRenderer.contents[0].itemSectionRenderer.contents[0]
-              .gridRenderer.items,
-            function (v, i) {
-              return {
-                name: v.gridVideoRenderer.title.runs[0].text,
-                videoId: v.gridVideoRenderer.videoId
-              }
-            }
-          )
-          console.log(youtubeVideos)
-          let liveStream = youtubeVideos.splice(
-            youtubeVideos.findIndex(x => x.name.includes('24/7')),
-            1
-          )[0]
-          vm.nowPlaying = liveStream.name.split(' - ')[0]
-          youtubeVideos.unshift(liveStream)
-          vm.youtubeVideos = youtubeVideos
-        })
-      },
-      scUser: function (url) {
-        vm.soundcloudData = []
-        $.get(vm.userURL, function (data, status) {
-          vm.soundcloudData = getData(data, 9, 'window.__sc_hydration = ')
-          console.log(vm.soundcloudData)
-          let user = getSCDataByKey('user', vm)
-          let tracks = vm.scUserTracks(user.id)
-          console.log(tracks)
-          download(tracks, user.permalink + ' - tracks.json')
-        })
-      },
-      scUserTracks: function (id) {
-        // console.log(id)
-        return $.get(
-          'https://api-v2.soundcloud.com/users/' +
-            id +
-            '/tracks?representation=&client_id=sqBVzKo4j9IoDkrB4lo2LJsSmZtfmUp5&limit=20&offset=0&linked_partitioning=1&app_version=1643299901&app_locale=en',
-          function (res, status) {
-            return res
-          }
-        ).responseJSON.collection
-      },
-      scPlaylist: function (url) {
-        vm.soundcloudData = []
-        $.get(vm.playListURL, function (data, status) {
-          vm.soundcloudData = getData(data, 9, 'window.__sc_hydration = ')
-          console.log(vm.soundcloudData)
-          let playlist = getSCDataByKey('playlist', vm)
-          console.log(playlist)
-          $.each(
-            chunk(
-              $.map(playlist.tracks, function (v, i) {
-                return v.id
-              }),
-              24
-            ),
-            function (i, ids) {
-              vm.scPlaylistTracks(encodeURIComponent(ids))
-            }
-          )
-          download(scPlaylistTracks, playlist.title + '.json')
-        })
-      },
-      scPlaylistTracks: function (ids) {
-        // console.log(ids)
-        $.get(
-          'https://api-v2.soundcloud.com/tracks?ids=' +
-            ids +
-            '&client_id=sqBVzKo4j9IoDkrB4lo2LJsSmZtfmUp5&%5Bobject%20Object%5D=&app_version=1643299901&app_locale=en',
-          function (res, status) {
-            scPlaylistTracks = merge(scPlaylistTracks, res)
-            console.log(scPlaylistTracks)
-          }
-        )
-      },
-      toggleVideo: function (action) {
-        $('.yt_player_iframe').each(function () {
-          this.contentWindow.postMessage(
-            '{"event":"command","func":"' + action + 'Video","args":""}',
-            '*'
-          )
-        })
-        this.musicStatus = $.grep(this.musicButtons, function (v, i) {
-          return v.action === action
-        })[0].status
+  chrome.tabs.query({}, function (tabs) {
+    console.log(tabs)
+    $.map(tabs, function (v, i) {
+      if (v.url.indexOf('youtube.com/watch') > 0) {
+        var i = setInterval(function () {
+          toggleVideo('stop')
+          clearInterval(i)
+        }, 500)
       }
-    },
-    computed: {
-      invoiceDateParsed () {
-        return moment(this.invoiceDate).format('DD/MM/YYYY')
-      }
-    }
+    })
   })
-  vm.ytVideos()
-  console.log(vm)
+  let videos = ytVideos()
+  $.each(videos, function (i) {
+    var li = $('<li/>', {
+      class: 'list-group-item'
+    }).appendTo($('.ytVideos'))
+    var aaa = $('<a/>', {
+      target: '_blank',
+      text: videos[i].name,
+      href: 'https://www.youtube.com/watch?v=' + videos[i].videoId
+    }).appendTo(li)
+  })
+  $('#showSC').change(function () {
+    showHideField($('.showSC'), this.checked)
+    $('.list-group').css({ 'max-height': this.checked ? '235px' : '280px' })
+  })
+  $('svg').click(function () {
+    toggleVideo(
+      $(this)
+        .attr('class')
+        .split('-')[1]
+    )
+  })
+  $('.socials a').each(function () {
+    $(this).attr(
+      'href',
+      socials[
+        $(this)
+          .attr('class')
+          .split('-')[1]
+      ]
+    )
+  })
+  $('.playlistScraper input').val(playListURL)
+  $('.userScraper input').val(userURL)
+  $('.playlistScraper button').click(function () {
+    scPlaylist()
+  })
+  $('.userScraper button').click(function () {
+    scUser()
+  })
+  $('.musicStatus p').text(musicStatus)
+  $('.logo').attr('href', socials.youtube)
 })
+
+function showHideField (field, bool) {
+  bool ? field.show() : field.hide()
+}
+function myTracks () {
+  $.get(
+    'https://api-v2.soundcloud.com/users/66593390/tracks?representation=&client_id=sqBVzKo4j9IoDkrB4lo2LJsSmZtfmUp5&limit=20&offset=0&linked_partitioning=1&app_version=1643299901&app_locale=en',
+    function (res, status) {
+      console.log(res.collection)
+    }
+  )
+}
+function ytVideos () {
+  let youtubeVideos = []
+  $.get(ytVideosURL, function (data, status) {
+    youtubeVideos = $.map(
+      getData(data, 32, 'var ytInitialData = ').contents
+        .twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content
+        .sectionListRenderer.contents[0].itemSectionRenderer.contents[0]
+        .gridRenderer.items,
+      function (v, i) {
+        return {
+          name: v.gridVideoRenderer.title.runs[0].text,
+          videoId: v.gridVideoRenderer.videoId
+        }
+      }
+    )
+    console.log(youtubeVideos)
+    let liveStream = youtubeVideos.splice(
+      youtubeVideos.findIndex(x => x.name.includes('24/7')),
+      1
+    )[0]
+    $('.nowPlaying p').text(liveStream.name.split(' - ')[0])
+    youtubeVideos.unshift(liveStream)
+  })
+  return youtubeVideos
+}
+function scUser () {
+  soundcloudData = []
+  $.get(userURL, function (data, status) {
+    soundcloudData = getData(data, 9, 'window.__sc_hydration = ')
+    console.log(soundcloudData)
+    let user = getSCDataByKey('user')
+    let tracks = scUserTracks(user.id)
+    console.log(tracks)
+    download(tracks, user.permalink + ' - tracks.json')
+  })
+}
+function scUserTracks (id) {
+  // console.log(id)
+  return $.get(
+    'https://api-v2.soundcloud.com/users/' +
+      id +
+      '/tracks?representation=&client_id=sqBVzKo4j9IoDkrB4lo2LJsSmZtfmUp5&limit=20&offset=0&linked_partitioning=1&app_version=1643299901&app_locale=en',
+    function (res, status) {
+      return res
+    }
+  ).responseJSON.collection
+}
+function scPlaylist () {
+  soundcloudData = []
+  $.get(playListURL, function (data, status) {
+    soundcloudData = getData(data, 9, 'window.__sc_hydration = ')
+    console.log(soundcloudData)
+    let playlist = getSCDataByKey('playlist')
+    console.log(playlist)
+    $.each(
+      chunk(
+        $.map(playlist.tracks, function (v, i) {
+          return v.id
+        }),
+        24
+      ),
+      function (i, ids) {
+        scrapeScPlaylistTracks(encodeURIComponent(ids))
+      }
+    )
+    download(scPlaylistTracks, playlist.title + '.json')
+  })
+}
+function scrapeScPlaylistTracks (ids) {
+  // console.log(ids)
+  $.get(
+    'https://api-v2.soundcloud.com/tracks?ids=' +
+      ids +
+      '&client_id=sqBVzKo4j9IoDkrB4lo2LJsSmZtfmUp5&%5Bobject%20Object%5D=&app_version=1643299901&app_locale=en',
+    function (res, status) {
+      scPlaylistTracks = merge(scPlaylistTracks, res)
+      console.log(scPlaylistTracks)
+    }
+  )
+}
+function toggleVideo (action) {
+  $('.yt_player_iframe').each(function () {
+    this.contentWindow.postMessage(
+      '{"event":"command","func":"' + action + 'Video","args":""}',
+      '*'
+    )
+  })
+  $('.musicStatus p').text(
+    $.grep(musicButtons, function (v, i) {
+      return v.action === action
+    })[0].status
+  )
+}
 
 function download (data, fileName) {
   const a = document.createElement('a')
@@ -267,8 +217,8 @@ function getData (data, index, string) {
   )
 }
 
-function getSCDataByKey (key, vm) {
-  return $.grep(vm.soundcloudData, function (v, i) {
+function getSCDataByKey (key) {
+  return $.grep(soundcloudData, function (v, i) {
     return v.hydratable === key
   })[0].data
 }

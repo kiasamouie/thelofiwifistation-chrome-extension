@@ -2,7 +2,9 @@
   "name": "LoFi WiFi",
   "version": "0.1",
   "icons": {},
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.youtube.com https://apis.google.com; object-src 'self';",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://www.youtube.com/;"
+  },
   "content_scripts": [
     {
       "matches": ["https://*/*"],
@@ -10,25 +12,24 @@
       "run_at": "document_end"
     }
   ],
-  "browser_action": {
+  "action": {
     "default_icon": "logo.png",
     "default_popup": "popup.html"
   },
-  "permissions": [
-    "tabs",
-    "activeTab",
-    "geolocation",
-    "https://www.googleapis.com/*",
-    "history"
-  ],
+  "host_permissions": ["https://www.googleapis.com/*"],
+  "permissions": ["tabs", "activeTab", "geolocation", "history"],
   "commands": {
-    "_execute_browser_action": {
+    "_execute_action": {
       "suggested_key": {
-        "default": "Alt+3",
-        "mac": "Alt+3"
+        "default": "Alt+3"
       }
     }
   },
-  "web_accessible_resources": ["reddit.css", "whatsapp.css", "instagram.css"],
-  "manifest_version": 2
+  "web_accessible_resources": [
+    {
+      "resources": [],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "manifest_version": 3
 }

@@ -5,93 +5,82 @@
 	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="bootstrap.css" crossorigin="anonymous">
 	<script src="bootstrap.js" crossorigin="anonymous"></script>
-	<link href="fontawesome.min.css" rel="stylesheet">
-	<script src="fontawesome.min.js"></script>
 	<script src="jquery-3.1.1.min.js"></script>
-	<script src="vue.js"></script>
 	<link rel="icon" type="image/png" href="logo.png" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="moment.js"></script>
 	<script src="popup.js"></script>
-	<script src="https://apis.google.com/js/platform.js"></script>
 </head>
 
-<div id="app">
-	<div class="position-absolute w-100" style="text-align: left; z-index: 999;left: 8px;top:1px">
-		<input type="checkbox" class="form-check-input" v-model="showSC" @change="toggleSC($event)" :value="showSC">
-	</div>
-	<div class="position-absolute w-100" style="text-align: right;right:3px">
-		<div id='time-part'></div>
-	</div>
-
-
-	<body>
-		<div class="container text-center">
-			<div class="row">
-				<div class="input-group m-1" style="cursor: pointer;">
-					<a :href="socials.youtube" target="_blank"><img src="logo.png" alt="TheLoFiWiFiStation" width="150"
-							height="150"></a>
-					<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16"
-						@click="toggleVideo('pause')">
-						<path
-							d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
-					</svg>
-					<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16"
-						@click="toggleVideo('play')">
-						<path
-							d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
-					</svg>
-					<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-stop" viewBox="0 0 16 16"
-						@click="toggleVideo('stop')">
-						<path
-							d="M3.5 5A1.5 1.5 0 0 1 5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5zM5 4.5a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V5a.5.5 0 0 0-.5-.5H5z" />
-					</svg>
-				</div>
-				<div class="position-relative musicStatus" style="bottom: 50px; left: 95px">
-					<div class="position-absolute end-50">{{musicStatus}}<span>...</span></div>
-				</div>
-				<div class="position-relative nowPlaying" style="bottom: 30px; left: 155px"
-					v-if="musicStatus == 'Playing'">
-					<div class="position-absolute end-50">{{nowPlaying}}</div>
-				</div>
-				<div class="form-group p-2">
-					<a :href="socials.youtube" target="_blank" class="fa fa-youtube"></a>
-					<a :href="socials.soundcloud" target="_blank" class="fa fa-soundcloud"
-						style="padding-left: 7px;"></a>
-					<a :href="socials.spotify" target="_blank" class="fa fa-spotify"></a>
-					<a :href="socials.instagram" target="_blank" class="fa fa-instagram"></a>
-					<a :href="socials.twitter" target="_blank" class="fa fa-twitter"></a>
-				</div>
-				<div class="col-xs-12 mb-2">
-					<ul class="list-group shadow-lg">
-						<li class="list-group-item" v-for="video in youtubeVideos">
-							<a :href="'https://www.youtube.com/watch?v='+video.videoId" target="_blank"
-								class="">{{video.name}}
-							</a>
-						</li>
-					</ul>
-				</div>
-				<iframe class="yt_player_iframe" width="0" height="0"
-					src="http://www.youtube.com/embed/hDXYlmGV_NY?autoplay=1&enablejsapi=1&version=3&playerapiid=ytplayer"
-					allowfullscreen="false" allowscriptaccess="always" frameborder="0"></iframe>
-			</div>
-			<div class="row" v-show="showSC">
-				<h5 class="text-muted">Soundcloud Scraper</h5>
-				<div class="input-group mb-1">
-					<input v-model="playListURL" class="form-control" />
-					<button type="button" @click="scPlaylist" id="scrape" class="input-group-text">Playlist</button>
-				</div>
-				<div class="input-group mb-1">
-					<input v-model="userURL" class="form-control" />
-					<button type="button" @click="scUser" id="scUser" class="input-group-text">User</button>
-				</div>
-				<div id="player"></div>
-			</div>
-
-		</div>
-	</body>
-
+<div class="position-absolute w-100" style="text-align: left; z-index: 999;left: 8px;top:1px">
+	<input type="checkbox" id="showSC" class="form-check-input">
 </div>
+<div class="position-absolute w-100 datetime" style="text-align: right;right:3px;">
+	<b>
+		<div id='date'></div>
+		<div id='time'></div>
+	</b>
+</div>
+
+
+<body>
+	<div class="container text-center">
+		<div class="row">
+			<div class="input-group m-1" style="cursor: pointer;">
+				<a class="logo" target="_blank"><img src="logo.png" alt="TheLoFiWiFiStation" width="150"
+						height="150"></a>
+				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">
+					<path
+						d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
+				</svg>
+				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
+					<path
+						d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+				</svg>
+				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-stop" viewBox="0 0 16 16">
+					<path
+						d="M3.5 5A1.5 1.5 0 0 1 5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5zM5 4.5a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V5a.5.5 0 0 0-.5-.5H5z" />
+				</svg>
+			</div>
+			<b>
+				<div class="position-relative musicStatus" style="bottom: 50px; left: 95px">
+					<p class="position-absolute end-50 m-0"></p>&nbsp;&nbsp;&nbsp;<span>...</span>
+				</div>
+				<div class="position-relative nowPlaying" style="bottom: 45px; left: 154px">
+					<p class=" position-absolute end-50"></p>
+				</div>
+			</b>
+			<div class="form-group socials pb-1">
+				<a target="_blank" href="#" class="fa fa-youtube"></a>
+				<a target="_blank" href="#" class="fa fa-soundcloud" style="padding-left: 7px;"></a>
+				<a target="_blank" href="#" class="fa fa-spotify"></a>
+				<a target="_blank" href="#" class="fa fa-instagram"></a>
+				<a target="_blank" href="#" class="fa fa-twitter"></a>
+			</div>
+			<div class="col-xs-12 mb-2">
+				<ul class="list-group shadow-lg ytVideos">
+				</ul>
+			</div>
+			<iframe class="yt_player_iframe" width="0" height="0"
+				src="http://www.youtube.com/embed/hDXYlmGV_NY?autoplay=1&enablejsapi=1&version=3&playerapiid=ytplayer"
+				allowfullscreen="false" allowscriptaccess="always" frameborder="0"></iframe>
+		</div>
+		<div class="row showSC" style="display: none;">
+			<h5 class="text-muted">Soundcloud Scraper</h5>
+			<div class="input-group mb-1 playlistScraper">
+				<input class="form-control" />
+				<button type="button" class="input-group-text">Playlist</button>
+			</div>
+			<div class="input-group mb-1 userScraper">
+				<input class="form-control" />
+				<button type="button" class="input-group-text">User</button>
+			</div>
+			<div id="player"></div>
+		</div>
+
+	</div>
+</body>
+
 
 </html>
 <style type="text/css">
@@ -129,8 +118,8 @@
 
 	.musicStatus,
 	.nowPlaying,
-	#time-part {
-		font-size: 14px;
+	.datetime {
+		font-size: 13px;
 
 	}
 
@@ -164,7 +153,7 @@
 		background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 		background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 		background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=' #f09433', endColorstr='#bc1888', GradientType=1);
 	}
 
 	.fa-twitter {
@@ -196,6 +185,7 @@
 		max-height: 280px;
 		overflow: scroll;
 		overflow-x: auto;
-		-webkit-overflow-scrolling: touch;
+		-webkit-overflow-scrolling:
+			touch;
 	}
 </style>
