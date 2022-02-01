@@ -2,11 +2,10 @@
 //   console.log(backgroundPage)
 // })
 $.ajaxSetup({ async: false })
-var today = moment().format('DD/MM/YYYY')
 var interval = setInterval(function () {
-  var momentNow = moment()
-  $('#date').html(momentNow.format('dddd, MMMM Do YYYY '))
-  $('#time').html(momentNow.format('hh:mm:ss A'))
+  var now = moment()
+  $('#date').html(now.format('dddd, MMMM Do YYYY '))
+  $('#time').html(now.format('HH:mm:ss A'))
 }, 100)
 var scPlaylistTracks = []
 var musicStatus = 'Playing'
@@ -32,7 +31,6 @@ var musicButtons = [
 
 $(document).ready(function () {
   chrome.tabs.query({}, function (tabs) {
-    console.log(tabs)
     $.map(tabs, function (v, i) {
       if (v.url.indexOf('youtube.com/watch') > 0) {
         var i = setInterval(function () {

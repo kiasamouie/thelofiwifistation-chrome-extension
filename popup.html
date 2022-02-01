@@ -12,10 +12,10 @@
 	<script src="popup.js"></script>
 </head>
 
-<div class="position-absolute w-100" style="text-align: left; z-index: 999;left: 8px;top:1px">
+<div class="position-absolute w-100 showSCChk">
 	<input type="checkbox" id="showSC" class="form-check-input">
 </div>
-<div class="position-absolute w-100 datetime" style="text-align: right;right:3px;">
+<div class="position-absolute w-100 datetime">
 	<b>
 		<div id='date'></div>
 		<div id='time'></div>
@@ -106,7 +106,7 @@
 
 	body {
 		height: 100%;
-		width: 400px;
+		width: 392px;
 		background-color: rgba(80, 252, 255, 0.753);
 		font-family: cursive;
 
@@ -117,10 +117,22 @@
 	}
 
 	.musicStatus,
-	.nowPlaying,
-	.datetime {
+	.nowPlaying {
 		font-size: 14px;
+	}
 
+	.showSCChk {
+		text-align: left;
+		z-index: 999;
+		left: 8px;
+		top: 1px
+	}
+
+	.datetime {
+		text-align: right;
+		right: 5px;
+		font-size: 14px;
+		top: 1px;
 	}
 
 	.bi {
