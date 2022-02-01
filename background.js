@@ -5,6 +5,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 })
 
+chrome.runtime.sendMessage({
+  msg: 'something_completed',
+  data: {
+    subject: 'Loading',
+    content: 'Just completed!'
+  }
+})
+
 $(document).ready(function () {})
 function Url (url) {
   return window.location.href.indexOf(url) > 0
@@ -22,13 +30,8 @@ function wait (ms) {
   }
 }
 
-// chrome.runtime.sendMessage({
-//     msg: "something_completed",
-//     data: {
-//         subject: "Loading",
-//         content: "Just completed!"
-//     }
-// });
+console.log(111111)
+
 // $.ajaxSetup({ async: true })
 
 // function Whatsapp () {

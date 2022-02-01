@@ -13,8 +13,17 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="moment.js"></script>
 	<script src="popup.js"></script>
+	<script src="https://apis.google.com/js/platform.js"></script>
 </head>
+
 <div id="app">
+	<div class="position-absolute w-100" style="text-align: left; z-index: 999;left: 8px;top:1px">
+		<input type="checkbox" class="form-check-input" v-model="showSC" @change="toggleSC($event)" :value="showSC">
+	</div>
+	<div class="position-absolute w-100" style="text-align: right;right:3px">
+		<div id='time-part'></div>
+	</div>
+
 
 	<body>
 		<div class="container text-center">
@@ -41,7 +50,7 @@
 				<div class="position-relative musicStatus" style="bottom: 50px; left: 95px">
 					<div class="position-absolute end-50">{{musicStatus}}<span>...</span></div>
 				</div>
-				<div class="position-relative nowPlaying" style="bottom: 30px; left: 140px"
+				<div class="position-relative nowPlaying" style="bottom: 30px; left: 155px"
 					v-if="musicStatus == 'Playing'">
 					<div class="position-absolute end-50">{{nowPlaying}}</div>
 				</div>
@@ -52,9 +61,6 @@
 					<a :href="socials.spotify" target="_blank" class="fa fa-spotify"></a>
 					<a :href="socials.instagram" target="_blank" class="fa fa-instagram"></a>
 					<a :href="socials.twitter" target="_blank" class="fa fa-twitter"></a>
-				</div>
-				<div class="form-group mb-1">
-
 				</div>
 				<div class="col-xs-12 mb-2">
 					<ul class="list-group shadow-lg">
@@ -69,7 +75,7 @@
 					src="http://www.youtube.com/embed/hDXYlmGV_NY?autoplay=1&enablejsapi=1&version=3&playerapiid=ytplayer"
 					allowfullscreen="false" allowscriptaccess="always" frameborder="0"></iframe>
 			</div>
-			<!-- <div class="row">
+			<div class="row" v-show="showSC">
 				<h5 class="text-muted">Soundcloud Scraper</h5>
 				<div class="input-group mb-1">
 					<input v-model="playListURL" class="form-control" />
@@ -79,12 +85,8 @@
 					<input v-model="userURL" class="form-control" />
 					<button type="button" @click="scUser" id="scUser" class="input-group-text">User</button>
 				</div>
-				<div class="input-group mb-1">
-					<input v-model="ytVideosURL" class="form-control" />
-					<button type="button" @click="ytVideos" id="ytVideos" class="input-group-text">ytVideos</button>
-				</div>
 				<div id="player"></div>
-			</div> -->
+			</div>
 
 		</div>
 	</body>
@@ -123,13 +125,11 @@
 		border-radius: 20px;
 	}
 
-	.musicStatus {
-		font-size: 11px;
-	}
-
-	.nowPlaying {
-		font-size: 11px;
-
+	.musicStatus,
+	.nowPlaying,
+	#time-part {
+		font-size: 14px;
+		font-family: cursive;
 	}
 
 	.bi {

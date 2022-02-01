@@ -28,10 +28,6 @@ function ScrapePlaylistData () {
   //         }
   //     }
   // );
-  // chrome.runtime.onMessage.addListener(function(request, sender) {
-  // 	if (request.type == "function-from-backend"){
-  //     }
-  // });
   // var variable
   // $.getJSON('.json', function (json) {
   //   variable = json
@@ -98,15 +94,22 @@ $.ajaxSetup({ async: false })
 var today = moment().format('DD/MM/YYYY')
 var scPlaylistTracks = []
 
+var interval = setInterval(function () {
+  var momentNow = moment()
+  $('#time-part').html(momentNow.format('DD/MM/YYYY - hh:mm:ss A'))
+}, 100)
+
 $(document).ready(function () {
-  vm = new Vue({
+  var vm = new Vue({
     el: '#app',
     data: {
-      edit: true,
+      today: today,
+      showSC: false,
       musicStatus: 'Playing',
       nowPlaying: null,
       playListURL:
         'https://soundcloud.com/sebastian-lopez-49626625/sets/lofi-remixes',
+
       userURL: 'https://soundcloud.com/thekiadoe',
       ytVideosURL: 'https://www.youtube.com/c/THELOFIWIFISTATION/videos',
       socials: {
@@ -125,6 +128,10 @@ $(document).ready(function () {
       ]
     },
     methods: {
+      toggleSC: function (event) {
+        console.log()
+        $('.list-group').css({ 'max-height': '257px' })
+      },
       myTracks: function () {
         $.get(
           'https://api-v2.soundcloud.com/users/66593390/tracks?representation=&client_id=sqBVzKo4j9IoDkrB4lo2LJsSmZtfmUp5&limit=20&offset=0&linked_partitioning=1&app_version=1643299901&app_locale=en',

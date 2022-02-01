@@ -2,11 +2,11 @@
   "name": "LoFi WiFi",
   "version": "0.1",
   "icons": {},
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.youtube.com; object-src 'self';",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.youtube.com https://apis.google.com; object-src 'self';",
   "content_scripts": [
     {
       "matches": ["https://*/*"],
-      "js": ["jquery-3.1.1.min.js"],
+      "js": ["jquery-3.1.1.min.js", "background.js"],
       "run_at": "document_end"
     }
   ],
