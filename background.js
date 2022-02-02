@@ -1,10 +1,3 @@
-var soundcloudData = []
-var key
-// chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-//   if (request.message === 'scrape' && Url('soundcloud')) {
-//   }
-// })
-
 $(document).ready(function () {})
 function Url (url) {
   return window.location.href.indexOf(url) > 0
