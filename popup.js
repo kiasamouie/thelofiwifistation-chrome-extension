@@ -119,7 +119,6 @@ function ytVideos () {
         }
       }
     )
-    console.log(youtubeVideos)
     let liveStream = youtubeVideos.splice(
       youtubeVideos.findIndex(x => x.name.includes('24/7')),
       1
@@ -127,6 +126,7 @@ function ytVideos () {
     $('.nowPlaying p').text(liveStream.name.split(' - ')[0])
     youtubeVideos.unshift(liveStream)
   })
+  console.log(youtubeVideos)
   return youtubeVideos
 }
 function scUser () {
@@ -187,6 +187,7 @@ function scrapeScPlaylistTracks (ids) {
   )
 }
 function toggleVideo (action) {
+  if (musicButtons[action] == $('.musicStatus p').text()) return
   $('.yt_player_iframe').each(function () {
     this.contentWindow.postMessage(
       '{"event":"command","func":"' + action + 'Video","args":""}',
