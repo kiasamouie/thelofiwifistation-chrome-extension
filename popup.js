@@ -2,17 +2,14 @@
 //   console.log(backgroundPage)
 // })
 $.ajaxSetup({ async: false })
-var interval = setInterval(function () {
-  var now = moment()
-  $('#date').html(now.format('dddd, MMMM Do YYYY '))
-  $('#time').html(now.format('HH:mm:ss A'))
-}, 100)
+InitDateTime()
 var scPlaylistTracks = []
+var youtubeVideos = []
+var souncloudData = []
 var musicStatus = 'Playing'
-var nowPlaying = null
-var playListURL =
-  'https://soundcloud.com/sebastian-lopez-49626625/sets/lofi-remixes'
-var userURL = 'https://soundcloud.com/thekiadoe'
+var nowPlaying = ''
+var playListURL = ''
+var userURL = ''
 var ytVideosURL = 'https://www.youtube.com/c/THELOFIWIFISTATION/videos'
 var socials = {
   youtube: 'https://www.youtube.com/c/THELOFIWIFISTATION',
@@ -21,15 +18,29 @@ var socials = {
   instagram: 'https://www.instagram.com/thelofiwifistation',
   twitter: 'https://twitter.com/LofiWifiStation'
 }
-var youtubeVideos = []
-var souncloudData = []
-var musicButtons = [
-  { action: 'stop', status: 'Stopped' },
-  { action: 'play', status: 'Playing' },
-  { action: 'pause', status: 'Paused' }
-]
+var musicButtons = {
+  stop: 'Stopped',
+  play: 'Playing',
+  pause: 'Paused'
+}
 
 $(document).ready(function () {
+  populateYoutubeVideos()
+  checkYoutubeWatchUrl()
+  InitEventHandlers()
+  populateSocials()
+  $('.musicStatus p').text(musicStatus)
+})
+
+function InitDateTime () {
+  var interval = setInterval(function () {
+    var now = moment()
+    $('#date').html(now.format('dddd, MMMM Do YYYY '))
+    $('#time').html(now.format('HH:mm:ss A'))
+  }, 100)
+}
+
+function checkYoutubeWatchUrl () {
   chrome.tabs.query({}, function (tabs) {
     $.map(tabs, function (v, i) {
       if (v.url.indexOf('youtube.com/watch') > 0) {
@@ -40,6 +51,9 @@ $(document).ready(function () {
       }
     })
   })
+}
+
+function populateYoutubeVideos () {
   let videos = ytVideos()
   $.each(videos, function (i) {
     var li = $('<li/>', {
@@ -51,9 +65,18 @@ $(document).ready(function () {
       href: 'https://www.youtube.com/watch?v=' + videos[i].videoId
     }).appendTo(li)
   })
+}
+
+function InitEventHandlers () {
   $('#showSC').change(function () {
     showHideField($('.showSC'), this.checked)
     $('.list-group').css({ 'max-height': this.checked ? '235px' : '280px' })
+  })
+  $('.playlistScraper button').click(function () {
+    scPlaylist()
+  })
+  $('.userScraper button').click(function () {
+    scUser()
   })
   $('svg').click(function () {
     toggleVideo(
@@ -62,6 +85,10 @@ $(document).ready(function () {
         .split('-')[1]
     )
   })
+}
+
+function populateSocials () {
+  $('.logo').attr('href', socials.youtube)
   $('.socials a').each(function () {
     $(this).attr(
       'href',
@@ -72,28 +99,10 @@ $(document).ready(function () {
       ]
     )
   })
-  $('.musicStatus p').text(musicStatus)
-  $('.logo').attr('href', socials.youtube)
-  $('.playlistScraper input').val(playListURL)
-  $('.userScraper input').val(userURL)
-  $('.playlistScraper button').click(function () {
-    scPlaylist()
-  })
-  $('.userScraper button').click(function () {
-    scUser()
-  })
-})
+}
 
 function showHideField (field, bool) {
   bool ? field.show() : field.hide()
-}
-function myTracks () {
-  $.get(
-    'https://api-v2.soundcloud.com/users/66593390/tracks?representation=&client_id=sqBVzKo4j9IoDkrB4lo2LJsSmZtfmUp5&limit=20&offset=0&linked_partitioning=1&app_version=1643299901&app_locale=en',
-    function (res, status) {
-      console.log(res.collection)
-    }
-  )
 }
 function ytVideos () {
   let youtubeVideos = []
@@ -122,6 +131,7 @@ function ytVideos () {
 }
 function scUser () {
   soundcloudData = []
+  userURL = $('.userScraper input').val()
   $.get(userURL, function (data, status) {
     soundcloudData = getData(data, 9, 'window.__sc_hydration = ')
     console.log(soundcloudData)
@@ -144,6 +154,7 @@ function scUserTracks (id) {
 }
 function scPlaylist () {
   soundcloudData = []
+  playListURL = $('.playlistScraper input').val()
   $.get(playListURL, function (data, status) {
     soundcloudData = getData(data, 9, 'window.__sc_hydration = ')
     console.log(soundcloudData)
@@ -182,11 +193,8 @@ function toggleVideo (action) {
       '*'
     )
   })
-  $('.musicStatus p').text(
-    $.grep(musicButtons, function (v, i) {
-      return v.action === action
-    })[0].status
-  )
+  $('.musicStatus p').text(musicButtons[action])
+  showHideField($('.nowPlaying'), action == 'play')
 }
 
 function download (data, fileName) {
