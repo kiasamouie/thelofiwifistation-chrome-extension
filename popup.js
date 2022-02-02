@@ -72,12 +72,8 @@ function InitEventHandlers () {
     showHideField($('.showSC'), this.checked)
     $('.list-group').css({ 'max-height': this.checked ? '235px' : '280px' })
   })
-  $('.playlistScraper button').click(function () {
-    scPlaylist()
-  })
-  $('.userScraper button').click(function () {
-    scUser()
-  })
+  $('.playlistScraper button').click(scPlaylist)
+  $('.userScraper button').click(scUser)
   $('svg').click(function () {
     toggleVideo(
       $(this)

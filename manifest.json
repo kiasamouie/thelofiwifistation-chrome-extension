@@ -1,7 +1,7 @@
 {
-  "name": "LoFi WiFi",
-  "version": "0.1",
-  "icons": {},
+  "name": "The LoFi WiFi Station",
+  "version": "1",
+  "description": "A simple tool to listen to The Lofi Wifi Station with useful links",
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://www.youtube.com/;"
   },
@@ -12,8 +12,13 @@
       "run_at": "document_end"
     }
   ],
+  "icons": {
+    "16": "logo/logo16.png",
+    "48": "logo/logo48.png",
+    "128": "logo/logo128.png"
+  },
   "action": {
-    "default_icon": "logo.png",
+    "default_icon": "logo/logo.png",
     "default_popup": "popup.html"
   },
   "host_permissions": ["https://www.googleapis.com/*"],
