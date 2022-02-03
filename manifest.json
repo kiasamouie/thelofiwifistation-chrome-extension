@@ -27,7 +27,8 @@
     "_execute_action": {
       "suggested_key": {
         "default": "Alt+3",
-        "mac": "Alt+3"
+        "mac": "Alt+3",
+        "windows": "Alt+3"
       }
     }
   },
