@@ -186,8 +186,8 @@ function scPlaylist () {
         scrapeScPlaylistTracks(encodeURIComponent(ids))
       }
     )
-    scPlaylistTracks = []
     download(scPlaylistTracks, playlist.title + '.json')
+    scPlaylistTracks = []
   })
 }
 function scrapeScPlaylistTracks (ids) {
