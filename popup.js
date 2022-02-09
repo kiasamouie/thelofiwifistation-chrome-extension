@@ -24,7 +24,7 @@ var musicButtons = {
   play: 'Playing',
   pause: 'Paused'
 }
-
+var videos
 var videoParams = {
   autoplay: 1,
   enablejsapi: 1,
@@ -33,12 +33,17 @@ var videoParams = {
 }
 
 $(document).ready(function () {
+  videos = ytVideos()
   populateYoutubeVideos()
   checkYoutubeWatchUrl()
   InitEventHandlers()
   populateSocials()
   $('.musicStatus p').text(musicStatus)
 })
+
+function Class (className, substr) {
+  return className.indexOf(substr) > 0
+}
 
 function InitDateTime () {
   var interval = setInterval(function () {
@@ -51,7 +56,7 @@ function InitDateTime () {
 function checkYoutubeWatchUrl () {
   chrome.tabs.query({}, function (tabs) {
     $.map(tabs, function (v, i) {
-      if (v.url.indexOf('youtube.com/watch') > 0) {
+      if (v.url.includes('youtube.com/watch')) {
         var i = setInterval(function () {
           toggleVideo('stop')
           clearInterval(i)
@@ -62,7 +67,6 @@ function checkYoutubeWatchUrl () {
 }
 
 function populateYoutubeVideos () {
-  let videos = ytVideos()
   $.each(videos, function (i) {
     var li = $('<li/>', {
       class: 'list-group-item'
@@ -182,6 +186,7 @@ function scPlaylist () {
         scrapeScPlaylistTracks(encodeURIComponent(ids))
       }
     )
+    scPlaylistTracks = []
     download(scPlaylistTracks, playlist.title + '.json')
   })
 }
