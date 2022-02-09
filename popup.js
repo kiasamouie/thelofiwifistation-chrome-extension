@@ -7,6 +7,7 @@ var scPlaylistTracks = []
 var youtubeVideos = []
 var souncloudData = []
 var musicStatus = 'Playing'
+var liveStream
 var nowPlaying = ''
 var playListURL = ''
 var userURL = ''
@@ -22,6 +23,13 @@ var musicButtons = {
   stop: 'Stopped',
   play: 'Playing',
   pause: 'Paused'
+}
+
+var videoParams = {
+  autoplay: 1,
+  enablejsapi: 1,
+  version: 3,
+  playerapiid: 'ytplayer'
 }
 
 $(document).ready(function () {
@@ -115,12 +123,19 @@ function ytVideos () {
         }
       }
     )
-    let liveStream = youtubeVideos.splice(
+    liveStream = youtubeVideos.splice(
       youtubeVideos.findIndex(x => x.name.includes('24/7')),
       1
     )[0]
-    $('.nowPlaying p').text(liveStream.name.split(' - ')[0])
     youtubeVideos.unshift(liveStream)
+    $('.nowPlaying p').text(liveStream.name.split(' - ')[0])
+    $('.yt_player_iframe').attr(
+      'src',
+      'http://www.youtube.com/embed/' +
+        liveStream.videoId +
+        '?' +
+        jQuery.param(videoParams)
+    )
   })
   console.log(youtubeVideos)
   return youtubeVideos
