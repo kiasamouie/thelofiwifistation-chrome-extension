@@ -114,33 +114,40 @@ function showHideField (field, bool) {
 }
 function ytVideos () {
   let youtubeVideos = []
-  $.get(ytVideosURL, function (data, status) {
-    youtubeVideos = $.map(
-      getData(data, 32, 'var ytInitialData = ').contents
-        .twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content
-        .sectionListRenderer.contents[0].itemSectionRenderer.contents[0]
-        .gridRenderer.items,
-      function (v, i) {
-        return {
-          name: v.gridVideoRenderer.title.runs[0].text,
-          videoId: v.gridVideoRenderer.videoId
+  //Get from localStorage if already used today
+  if (moment(localStorage.timestamp).isSame(moment(), 'day')) {
+    youtubeVideos = JSON.parse(localStorage.youtubeVideos)
+  } else {
+    $.get(ytVideosURL, function (data, status) {
+      youtubeVideos = $.map(
+        getData(data, 32, 'var ytInitialData = ').contents
+          .twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content
+          .sectionListRenderer.contents[0].itemSectionRenderer.contents[0]
+          .gridRenderer.items,
+        function (v, i) {
+          return {
+            name: v.gridVideoRenderer.title.runs[0].text,
+            videoId: v.gridVideoRenderer.videoId
+          }
         }
-      }
-    )
-    liveStream = youtubeVideos.splice(
-      youtubeVideos.findIndex(x => x.name.includes('24/7')),
-      1
-    )[0]
-    youtubeVideos.unshift(liveStream)
-    $('.nowPlaying p').text(liveStream.name.split(' - ')[0])
-    $('.yt_player_iframe').attr(
-      'src',
-      'http://www.youtube.com/embed/' +
-        liveStream.videoId +
-        '?' +
-        jQuery.param(videoParams)
-    )
-  })
+      )
+      localStorage.setItem('timestamp', moment().format('YYYY-MM-DD'))
+      localStorage.setItem('youtubeVideos', JSON.stringify(youtubeVideos))
+    })
+  }
+  liveStream = youtubeVideos.splice(
+    youtubeVideos.findIndex(x => x.name.includes('24/7')),
+    1
+  )[0]
+  youtubeVideos.unshift(liveStream)
+  $('.nowPlaying p').text(liveStream.name.split(' - ')[0])
+  $('.yt_player_iframe').attr(
+    'src',
+    'http://www.youtube.com/embed/' +
+      liveStream.videoId +
+      '?' +
+      jQuery.param(videoParams)
+  )
   console.log(youtubeVideos)
   return youtubeVideos
 }
@@ -157,7 +164,7 @@ function scUser () {
   })
 }
 function scUserTracks (id) {
-  // console.log(id)
+  console.log(id)
   return $.get(
     'https://api-v2.soundcloud.com/users/' +
       id +
