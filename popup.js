@@ -113,11 +113,13 @@ function showHideField (field, bool) {
   bool ? field.show() : field.hide()
 }
 function ytVideos () {
-  let youtubeVideos = []
-  //Get from localStorage if already used today
-  if (moment(localStorage.timestamp).isSame(moment(), 'day')) {
-    youtubeVideos = JSON.parse(localStorage.youtubeVideos)
-  } else {
+  //Get data from localStorage if already today or from YT videos
+  let youtubeVideos =
+    (localStorage.timestamp &&
+      moment(localStorage.timestamp).isSame(moment(), 'day') &&
+      JSON.parse(localStorage.youtubeVideos)) ||
+    []
+  if (!youtubeVideos.length) {
     $.get(ytVideosURL, function (data, status) {
       youtubeVideos = $.map(
         getData(data, 32, 'var ytInitialData = ').contents
