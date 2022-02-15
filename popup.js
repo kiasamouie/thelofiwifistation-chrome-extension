@@ -68,14 +68,15 @@ function checkYoutubeWatchUrl () {
 
 function populateYoutubeVideos () {
   $.each(videos, function (i) {
-    var li = $('<li/>', {
-      class: 'list-group-item'
-    }).appendTo($('.ytVideos'))
-    var aaa = $('<a/>', {
+    $('<a/>', {
       target: '_blank',
       text: videos[i].name,
       href: 'https://www.youtube.com/watch?v=' + videos[i].videoId
-    }).appendTo(li)
+    }).appendTo(
+      $('<li/>', {
+        class: 'list-group-item'
+      }).appendTo($('.ytVideos'))
+    )
   })
 }
 
@@ -181,22 +182,10 @@ function scPlaylist () {
   playListURL = $('.playlistScraper input').val()
   $.get(playListURL, function (data, status) {
     soundcloudData = getData(data, 9, 'window.__sc_hydration = ')
-    console.log(soundcloudData)
     let playlist = getSCDataByKey('playlist')
+    console.log(soundcloudData)
     console.log(playlist)
-    $.each(
-      chunk(
-        $.map(playlist.tracks, function (v, i) {
-          return v.id
-        }),
-        24
-      ),
-      function (i, ids) {
-        scrapeScPlaylistTracks(encodeURIComponent(ids))
-      }
-    )
-    download(scPlaylistTracks, playlist.title + '.json')
-    scPlaylistTracks = []
+    download(playlist.tracks, playlist.title + '.json')
   })
 }
 function scrapeScPlaylistTracks (ids) {
