@@ -114,7 +114,7 @@ function showHideField (field, bool) {
   bool ? field.show() : field.hide()
 }
 function ytVideos () {
-  //Get data from localStorage if already today or from YT videos
+  //Get data from localStorage if today or from YT videos
   let youtubeVideos =
     (localStorage.timestamp &&
       moment(localStorage.timestamp).isSame(moment(), 'day') &&
@@ -215,7 +215,17 @@ function scrapeScPlaylistTracks (ids) {
   )
 }
 function toggleVideo (action) {
-  if (musicButtons[action] == $('.musicStatus').text()) return
+  let currentAction = getKeyByValue(
+    musicButtons,
+    $('.musicStatus')
+      .text()
+      .replace('...', '')
+  )
+  if (
+    musicButtons[action] == $('.musicStatus').text() ||
+    (action == 'pause' && currentAction == 'stop')
+  )
+    return
   $('.yt_player_iframe').each(function () {
     this.contentWindow.postMessage(
       '{"event":"command","func":"' + action + 'Video","args":""}',
@@ -224,6 +234,10 @@ function toggleVideo (action) {
   })
   $('.musicStatus').text(musicButtons[action] + '...')
   showHideField($('.nowPlaying'), action == 'play')
+}
+
+function getKeyByValue (object, value) {
+  return Object.keys(object).find(key => object[key] === value)
 }
 
 function download (data, fileName) {
