@@ -121,22 +121,24 @@ function ytVideos () {
       JSON.parse(localStorage.youtubeVideos)) ||
     []
   if (!youtubeVideos.length) {
-    $.get(ytVideosURL, function (data, status) {
-      youtubeVideos = $.map(
-        getData(data, 32, 'var ytInitialData = ').contents
-          .twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content
-          .sectionListRenderer.contents[0].itemSectionRenderer.contents[0]
-          .gridRenderer.items,
-        function (v, i) {
-          return {
-            name: v.gridVideoRenderer.title.runs[0].text,
-            videoId: v.gridVideoRenderer.videoId
+    console.log(
+      $.get(ytVideosURL, function (data, status) {
+        youtubeVideos = $.map(
+          getData(data, 32, 'var ytInitialData = ').contents
+            .twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content
+            .sectionListRenderer.contents[0].itemSectionRenderer.contents[0]
+            .gridRenderer.items,
+          function (v, i) {
+            return {
+              name: v.gridVideoRenderer.title.runs[0].text,
+              videoId: v.gridVideoRenderer.videoId
+            }
           }
-        }
-      )
-      localStorage.setItem('timestamp', moment().format('YYYY-MM-DD'))
-      localStorage.setItem('youtubeVideos', JSON.stringify(youtubeVideos))
-    })
+        )
+        localStorage.setItem('timestamp', moment().format('YYYY-MM-DD'))
+        localStorage.setItem('youtubeVideos', JSON.stringify(youtubeVideos))
+      })
+    )
   }
   liveStream = youtubeVideos.splice(
     youtubeVideos.findIndex(x => x.name.includes('24/7')),
