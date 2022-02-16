@@ -6,7 +6,7 @@ InitDateTime()
 var scPlaylistTracks = []
 var youtubeVideos = []
 var souncloudData = []
-var musicStatus = 'Playing'
+var musicStatus = 'Playing...'
 var liveStream
 var nowPlaying = ''
 var playListURL = ''
@@ -38,7 +38,7 @@ $(document).ready(function () {
   checkYoutubeWatchUrl()
   InitEventHandlers()
   populateSocials()
-  $('.musicStatus p').text(musicStatus)
+  $('.musicStatus').text(musicStatus)
 })
 
 function Class (className, substr) {
@@ -83,11 +83,11 @@ function populateYoutubeVideos () {
 function InitEventHandlers () {
   $('#showSC').change(function () {
     showHideField($('.showSC'), this.checked)
-    $('.list-group').css({ 'max-height': this.checked ? '235px' : '280px' })
+    $('.list-group').css({ 'max-height': this.checked ? '254px' : '280px' })
   })
   $('.playlistScraper button').click(scPlaylist)
   $('.userScraper button').click(scUser)
-  $('svg').click(function () {
+  $('.fa').click(function () {
     toggleVideo(
       $(this)
         .attr('class')
@@ -143,7 +143,7 @@ function ytVideos () {
     1
   )[0]
   youtubeVideos.unshift(liveStream)
-  $('.nowPlaying p').text(liveStream.name.split(' - ')[0])
+  $('.nowPlaying').text(liveStream.name.split(' - ')[0])
   $('.yt_player_iframe').attr(
     'src',
     'http://www.youtube.com/embed/' +
@@ -185,7 +185,19 @@ function scPlaylist () {
     let playlist = getSCDataByKey('playlist')
     console.log(soundcloudData)
     console.log(playlist)
-    download(playlist.tracks, playlist.title + '.json')
+    $.each(
+      chunk(
+        $.map(playlist.tracks, function (v, i) {
+          return v.id
+        }),
+        24
+      ),
+      function (i, ids) {
+        scrapeScPlaylistTracks(encodeURIComponent(ids))
+      }
+    )
+    download(scPlaylistTracks, playlist.title + '.json')
+    scPlaylistTracks = []
   })
 }
 function scrapeScPlaylistTracks (ids) {
@@ -201,14 +213,14 @@ function scrapeScPlaylistTracks (ids) {
   )
 }
 function toggleVideo (action) {
-  if (musicButtons[action] == $('.musicStatus p').text()) return
+  if (musicButtons[action] == $('.musicStatus').text()) return
   $('.yt_player_iframe').each(function () {
     this.contentWindow.postMessage(
       '{"event":"command","func":"' + action + 'Video","args":""}',
       '*'
     )
   })
-  $('.musicStatus p').text(musicButtons[action])
+  $('.musicStatus').text(musicButtons[action] + '...')
   showHideField($('.nowPlaying'), action == 'play')
 }
 

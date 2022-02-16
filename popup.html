@@ -16,10 +16,8 @@
 	<input type="checkbox" id="showSC" class="form-check-input">
 </div>
 <div class="position-absolute w-100 datetime">
-	<b>
-		<div id='date'></div>
-		<div id='time'></div>
-	</b>
+	<div id='date'></div>
+	<div id='time'></div>
 </div>
 
 <body>
@@ -28,27 +26,14 @@
 			<div class="input-group m-1" style="cursor: pointer;">
 				<a class="logo" target="_blank"><img src="/logo/logo.png" alt="TheLoFiWiFiStation" width="150"
 						height="150"></a>
-				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">
-					<path
-						d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
-				</svg>
-				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
-					<path
-						d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
-				</svg>
-				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-stop" viewBox="0 0 16 16">
-					<path
-						d="M3.5 5A1.5 1.5 0 0 1 5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5zM5 4.5a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V5a.5.5 0 0 0-.5-.5H5z" />
-				</svg>
 			</div>
-			<b>
-				<div class="position-relative musicStatus" style="bottom: 50px; left: 95px">
-					<p class="position-absolute end-50 m-0"></p>&nbsp;&nbsp;&nbsp;<span>...</span>
-				</div>
-				<div class="position-relative nowPlaying" style="bottom: 45px; left: 165px">
-					<p class=" position-absolute end-50"></p>
-				</div>
-			</b>
+			<div class="position-absolute music">
+				<i class="fa fa-pause"></i>
+				<i class="fa fa-play"></i>
+				<i class="fa fa-stop"></i>
+				<p class="musicStatus mb-0"></p>
+				<p class="nowPlaying mb-0"></p>
+			</div>
 			<div class="form-group socials pb-1">
 				<a target="_blank" href="#" class="fa fa-youtube"></a>
 				<a target="_blank" href="#" class="fa fa-soundcloud" style="padding-left: 7px;"></a>
@@ -63,7 +48,7 @@
 			<iframe class="yt_player_iframe" src="" allowfullscreen="false" allowscriptaccess="always"
 				frameborder="0"></iframe>
 		</div>
-		<div class="row showSC" style="display: none;">
+		<div class="row showSC mb-1" style="display: none;">
 			<h5 class="text-muted">Soundcloud Scraper</h5>
 			<div class="input-group mb-1 playlistScraper">
 				<input class="form-control" value="https://soundcloud.com/sebastian-lopez-49626625/sets/lofi-remixes" />
@@ -118,7 +103,6 @@
 	}
 
 	.showSCChk {
-		text-align: left;
 		z-index: 999;
 		left: 8px;
 		top: 1px
@@ -128,6 +112,7 @@
 		text-align: right;
 		right: 5px;
 		font-size: 14px;
+		font-weight: bold;
 		top: 1px;
 	}
 
@@ -143,10 +128,10 @@
 
 	.fa {
 		padding: 10px;
-		font-size: 25px;
+		font-size: 35px;
 		text-decoration: none;
 		border-radius: 50%;
-		width: 12%;
+		width: 16%;
 	}
 
 	.fa:hover {
@@ -197,9 +182,24 @@
 			touch;
 	}
 
+	.music {
+		left: 72px;
+		top: 40px;
+		font-weight: bold;
+	}
+
+	.music i {
+		font-size: 42px;
+		cursor: pointer;
+	}
+
 	.yt_player_iframe {
 		width: 100%;
 		height: 100%;
 		display: none;
+	}
+
+	.logo {
+		z-index: 998;
 	}
 </style>
