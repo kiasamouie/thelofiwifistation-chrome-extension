@@ -32,6 +32,152 @@ var videoParams = {
   playerapiid: 'ytplayer'
 }
 
+var names = [
+  'Frook ',
+  'Jhfly ',
+  'Don c',
+  'Idealism',
+  'Guru griff',
+  'Flughand ',
+  'Glimlip',
+  'Bido',
+  'Ahwlee',
+  'Axian',
+  'Sleepy fish',
+  'Gyvus ',
+  'Saito',
+  'Gonza',
+  'Alex',
+  'Maoen',
+  'Jinsang',
+  'philanthrope',
+  'Dusty decks',
+  'Henyao',
+  'Silo',
+  'Voyage',
+  'Kendall Miles',
+  "J'san",
+  'Dlj',
+  'Camro',
+  'Otis ubaka',
+  'Emapea',
+  'Samwisee',
+  'Johto',
+  "I'll flottante",
+  "L'indecis",
+  'Ak420',
+  'Purple cat',
+  'T stratt',
+  'Harris Cole',
+  'Lucid',
+  'hm surf',
+  'Ginji ',
+  'Rookie',
+  'Elijah nang',
+  'Joey pecoraco',
+  'Saib',
+  'Soho',
+  'Domo',
+  'Apo',
+  'Mommy',
+  'Downtown owl',
+  'Potsu',
+  'Twuan',
+  'Sky high',
+  'Delayde',
+  'Miraa',
+  'Flamingosis',
+  'Garba9',
+  'A3le',
+  'Leavv',
+  'knowmadic',
+  'Digitaluc',
+  '90sflav',
+  'Chief',
+  'Huey daze',
+  'Flofilz',
+  'Moow',
+  'Mago',
+  'Gentlebeatz',
+  'Headphone activist',
+  'Akuma',
+  'Ajmw',
+  'Eaup',
+  'yestalgia',
+  'Mt fujitive',
+  'Warm keys',
+  'Globulhub',
+  'Loop holes, loop fattig',
+  'Toj',
+  'Toonorth',
+  'Saito and Lester ',
+  'Muralee',
+  'Joe cornfield',
+  'Momma',
+  'Matt quentin',
+  'Elijah who',
+  'Guustavv',
+  'Medda',
+  'Aso',
+  'the deli',
+  'muralee',
+  'miscel',
+  'Only ',
+  'creative self',
+  'nom tunes',
+  'lost son',
+  'mago',
+  'Marion Knight ',
+  'Wun 4 dilla - saiko',
+  'spaze windu',
+  'Sad boy with a laptop',
+  'Burbank',
+  'Camro',
+  'Jordy chandra',
+  'Leaf beach',
+  'Aimless',
+  'Soulou',
+  'Leaf beach',
+  'Tusken',
+  'Caleb belkin',
+  'Soullue',
+  'Justice der',
+  'A(way)',
+  'Zmeyev',
+  'No sugar no calories;sleepermane',
+  'Mila coolness',
+  'Astroblk',
+  'Kayou',
+  'Ai means love',
+  'Aphrow',
+  'Moonandco',
+  'Edmnd/kap ',
+  'Ridrohules',
+  'Koralle',
+  'Niquo',
+  'Konteks',
+  'Melodiesinfonie',
+  'Yeyts',
+  'Tesk',
+  'Sitting duck',
+  'Deauxnuts',
+  'twotrees',
+  'No spirit',
+  'Kevoe West',
+  'Aftrthgt',
+  'Didi crazz',
+  'Mum child',
+  'Lofi luke',
+  'Augi wa',
+  'Mt marcy',
+  'Barradeen ',
+  'Ddob ',
+  'Joan of arc',
+  'Minihaze',
+  'Oofoe',
+  'Lonesome flatpicker'
+]
+
 $(document).ready(function () {
   videos = ytVideos()
   populateYoutubeVideos()
@@ -87,6 +233,8 @@ function InitEventHandlers () {
   })
   $('.playlistScraper button').click(scPlaylist)
   $('.userScraper button').click(scUser)
+  $('.ytDescription button').click(ytDescription)
+  $('.search button').click(search)
   $('.fa').click(function () {
     toggleVideo(
       $(this)
@@ -124,7 +272,7 @@ function ytVideos () {
     console.log(
       $.get(ytVideosURL, function (data, status) {
         youtubeVideos = $.map(
-          getData(data, 32, 'var ytInitialData = ').contents
+          getData(data, 33, 'var ytInitialData = ').contents
             .twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content
             .sectionListRenderer.contents[0].itemSectionRenderer.contents[0]
             .gridRenderer.items,
@@ -155,6 +303,35 @@ function ytVideos () {
   )
   console.log(youtubeVideos)
   return youtubeVideos
+}
+var soundcloudSearchResults = []
+function searchSoundcloud (query) {
+  return $.get(
+    'https://api-v2.soundcloud.com/search?q=' +
+      encodeURIComponent(query) +
+      '&sc_a_id=7394189d02c68695a67c67ca6b58135d849a187f&variant_ids=&facet=model&user_id=545777-543470-899163-553282&client_id=1QbwiKi5rEpTxadDPOHqUwsmUr6pDf0L&limit=20&offset=0&linked_partitioning=1&app_version=1646212062&app_locale=en',
+    function (res, status) {
+      let url = res.collection[0] && res.collection[0].permalink_url
+      console.log(query + ' - ' + (url || "Didn't find"))
+      soundcloudSearchResults.push(query + ' - ' + (url || "Didn't find"))
+    }
+  )
+}
+
+function search () {
+  $.each(names, function (i, name) {
+    searchSoundcloud(encodeURIComponent(name))
+  })
+  download(soundcloudSearchResults, 'SoundcloudSearch.json')
+  soundcloudSearchResults = []
+}
+function ytDescription () {
+  ytDescriptionURL = $('.ytDescription input').val()
+  $.get(ytDescriptionURL, function (data, status) {
+    data = getData(data, 39, 'var ytInitialData = ')
+    console.log(data)
+    // download(tracks, user.permalink + ' - tracks.json')
+  })
 }
 function scUser () {
   soundcloudData = []
@@ -203,11 +380,11 @@ function scPlaylist () {
   })
 }
 function scrapeScPlaylistTracks (ids) {
-  // console.log(ids)
+  console.log(ids)
   $.get(
     'https://api-v2.soundcloud.com/tracks?ids=' +
       ids +
-      '&client_id=sqBVzKo4j9IoDkrB4lo2LJsSmZtfmUp5&%5Bobject%20Object%5D=&app_version=1643299901&app_locale=en',
+      '&client_id=1CZUOY7BrjNOdkrJ1KkeLJ04sqXoxRR3&%5Bobject%20Object%5D=&app_version=1646415212&app_locale=en',
     function (res, status) {
       scPlaylistTracks = merge(scPlaylistTracks, res)
       console.log(scPlaylistTracks)
@@ -259,6 +436,8 @@ function createDom (data) {
 }
 
 function getData (data, index, string) {
+  // console.log($(createDom(data))[0].scripts)
+  // return
   return JSON.parse(
     $(createDom(data))[0]
       .scripts[index].innerText.slice(0, -1)
