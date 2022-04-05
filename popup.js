@@ -360,7 +360,7 @@ function scPlaylist () {
   soundcloudData = []
   playListURL = $('.playlistScraper input').val()
   $.get(playListURL, function (data, status) {
-    soundcloudData = getData(data, 9, 'window.__sc_hydration = ')
+    soundcloudData = getData(data, 10, 'window.__sc_hydration = ')
     let playlist = getSCDataByKey('playlist')
     console.log(soundcloudData)
     console.log(playlist)
@@ -436,6 +436,8 @@ function createDom (data) {
 }
 
 function getData (data, index, string) {
+  // console.log(string)
+  // console.log(index)
   // console.log($(createDom(data))[0].scripts)
   // return
   return JSON.parse(
