@@ -345,7 +345,7 @@ function scUser () {
   soundcloudData = []
   userURL = $('.userScraper input').val()
   $.get(userURL, function (data, status) {
-    soundcloudData = getData(data, 9, 'window.__sc_hydration = ')
+    soundcloudData = getData(data, 10, 'window.__sc_hydration = ')
     console.log(soundcloudData)
     let user = getSCDataByKey('user')
     let tracks = scUserTracks(user.id)
