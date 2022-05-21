@@ -314,7 +314,10 @@ function searchSoundcloud (query) {
       encodeURIComponent(query) +
       '&sc_a_id=7394189d02c68695a67c67ca6b58135d849a187f&variant_ids=&facet=model&user_id=545777-543470-899163-553282&client_id=' +
       client_id +
-      '&app_version=1649920649&app_locale=en',
+      '&app_version=' +
+      app_version +
+      '&app_locale=' +
+      app_locale,
     function (res, status) {
       let url = res.collection[0] && res.collection[0].permalink_url
       console.log(query + ' - ' + (url || "Didn't find"))
@@ -357,7 +360,10 @@ function scUserTracks (id) {
       id +
       '/tracks?representation=&client_id=' +
       client_id +
-      '&app_version=1649920649&app_locale=en',
+      '&app_version=' +
+      app_version +
+      '&app_locale=' +
+      app_locale,
     function (res, status) {
       return res
     }
