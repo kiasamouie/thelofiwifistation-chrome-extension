@@ -31,6 +31,9 @@ var videoParams = {
   version: 3,
   playerapiid: 'ytplayer'
 }
+var client_id = 'xJmsHs37dLKGnKYrWkjl2xQYMEtUp1nz'
+var app_version = '1652769205'
+var app_locale = 'en'
 
 var names = [
   'Frook ',
@@ -309,7 +312,9 @@ function searchSoundcloud (query) {
   return $.get(
     'https://api-v2.soundcloud.com/search?q=' +
       encodeURIComponent(query) +
-      '&sc_a_id=7394189d02c68695a67c67ca6b58135d849a187f&variant_ids=&facet=model&user_id=545777-543470-899163-553282&client_id=1QbwiKi5rEpTxadDPOHqUwsmUr6pDf0L&limit=20&offset=0&linked_partitioning=1&app_version=1646212062&app_locale=en',
+      '&sc_a_id=7394189d02c68695a67c67ca6b58135d849a187f&variant_ids=&facet=model&user_id=545777-543470-899163-553282&client_id=' +
+      client_id +
+      '&app_version=1649920649&app_locale=en',
     function (res, status) {
       let url = res.collection[0] && res.collection[0].permalink_url
       console.log(query + ' - ' + (url || "Didn't find"))
@@ -350,7 +355,9 @@ function scUserTracks (id) {
   return $.get(
     'https://api-v2.soundcloud.com/users/' +
       id +
-      '/tracks?representation=&client_id=sqBVzKo4j9IoDkrB4lo2LJsSmZtfmUp5&limit=20&offset=0&linked_partitioning=1&app_version=1643299901&app_locale=en',
+      '/tracks?representation=&client_id=' +
+      client_id +
+      '&app_version=1649920649&app_locale=en',
     function (res, status) {
       return res
     }
@@ -384,7 +391,12 @@ function scrapeScPlaylistTracks (ids) {
   $.get(
     'https://api-v2.soundcloud.com/tracks?ids=' +
       ids +
-      '&client_id=1CZUOY7BrjNOdkrJ1KkeLJ04sqXoxRR3&%5Bobject%20Object%5D=&app_version=1646415212&app_locale=en',
+      '&client_id=' +
+      client_id +
+      '&app_version=' +
+      app_version +
+      '&app_locale=' +
+      app_locale,
     function (res, status) {
       scPlaylistTracks = merge(scPlaylistTracks, res)
       console.log(scPlaylistTracks)
