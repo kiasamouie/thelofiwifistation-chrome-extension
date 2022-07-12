@@ -11,7 +11,6 @@ var liveStream
 var nowPlaying = ''
 var playListURL = ''
 var userURL = ''
-var ytVideosURL = 'https://www.youtube.com/c/THELOFIWIFISTATION/videos'
 var socials = {
   youtube: 'https://www.youtube.com/c/THELOFIWIFISTATION',
   soundcloud: 'https://soundcloud.com/thelofiwifistation',
@@ -31,9 +30,19 @@ var videoParams = {
   version: 3,
   playerapiid: 'ytplayer'
 }
-var client_id = 'xJmsHs37dLKGnKYrWkjl2xQYMEtUp1nz'
-var app_version = '1652769205'
-var app_locale = 'en'
+
+var client_id
+var app_version
+var app_locale
+
+$.getJSON('config.json', function (json) {
+  client_id = json.client_id
+  app_version = json.app_version
+  app_locale = json.app_locale
+})
+
+console.log(client_id)
+var soundcloudUserId
 
 $(document).ready(function () {
   videos = ytVideos()
@@ -90,6 +99,7 @@ function InitEventHandlers () {
   })
   $('.playlistScraper button').click(scPlaylist)
   $('.userScraper button').click(scUser)
+  $('.userLastTracks button').click(scUserLastTracks)
   $('.ytDescription button').click(ytDescription)
   $('.fa').click(function () {
     toggleVideo(
@@ -126,7 +136,7 @@ function ytVideos () {
     []
   if (!youtubeVideos.length) {
     console.log(
-      $.get(ytVideosURL, function (data, status) {
+      $.get(socials.youtube + '/videos', function (data, status) {
         youtubeVideos = $.map(
           getData(data, 33, 'var ytInitialData = ').contents
             .twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content
@@ -175,16 +185,23 @@ function scUser () {
     soundcloudData = getData(data, 10, 'window.__sc_hydration = ')
     console.log(soundcloudData)
     let user = getSCDataByKey('user')
-    let tracks = scUserTracks(user.id)
+    soundcloudUserId = user.id
+    let tracks = scUserTracks(user)
     console.log(tracks)
     download(tracks, user.permalink + ' - tracks.json')
   })
 }
-function scUserTracks (id) {
-  console.log(id)
+function scUserTracks (user) {
+  console.log(user)
+  let limit = $('.userLastTracks .limit')
+  let id = $('.userLastTracks .id')
+  soundcloudUserId = user.id
+  id.val(soundcloudUserId)
+  id.removeAttr('disabled')
+  limit.removeAttr('disabled')
   return $.get(
     'https://api-v2.soundcloud.com/users/' +
-      id +
+      user.id +
       '/tracks?representation=&client_id=' +
       client_id +
       '&app_version=' +
@@ -233,6 +250,40 @@ function scrapeScPlaylistTracks (ids) {
     function (res, status) {
       scPlaylistTracks = merge(scPlaylistTracks, res)
       console.log(scPlaylistTracks)
+    }
+  )
+}
+function scUserLastTracks () {
+  limit = 10
+  console.log(
+    'https://api-v2.soundcloud.com/stream/users/' +
+      soundcloudUserId +
+      '?offset=2021-03-19T23:15:18.000Z,tracks,01011515467&limit=' +
+      limit +
+      '&client_id=' +
+      client_id +
+      '&app_version=' +
+      app_version +
+      '&app_locale=' +
+      app_locale
+  )
+  if (!soundcloudUserId) {
+    alert('No SoundCloud ID')
+    return
+  }
+  $.get(
+    'https://api-v2.soundcloud.com/stream/users/' +
+      soundcloudUserId +
+      '?offset=2021-03-19T23:15:18.000Z,tracks,01011515467&limit=' +
+      limit +
+      '&client_id=' +
+      client_id +
+      '&app_version=' +
+      app_version +
+      '&app_locale=' +
+      app_locale,
+    function (res, status) {
+      console.log(res)
     }
   )
 }
