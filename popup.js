@@ -138,7 +138,7 @@ function ytVideos () {
     console.log(
       $.get(socials.youtube + '/videos', function (data, status) {
         youtubeVideos = $.map(
-          getData(data, 33, 'var ytInitialData = ').contents
+          getData(data, 'var ytInitialData = ').contents
             .twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content
             .sectionListRenderer.contents[0].itemSectionRenderer.contents[0]
             .gridRenderer.items,
@@ -173,7 +173,7 @@ function ytVideos () {
 function ytDescription () {
   ytDescriptionURL = $('.ytDescription input').val()
   $.get(ytDescriptionURL, function (data, status) {
-    data = getData(data, 39, 'var ytInitialData = ')
+    data = getData(data, 'var ytInitialData = ')
     console.log(data)
     // download(tracks, user.permalink + ' - tracks.json')
   })
@@ -182,7 +182,7 @@ function scUser () {
   soundcloudData = []
   userURL = $('.userScraper input').val()
   $.get(userURL, function (data, status) {
-    soundcloudData = getData(data, 10, 'window.__sc_hydration = ')
+    soundcloudData = getData(data, 'window.__sc_hydration = ')
     console.log(soundcloudData)
     let user = getSCDataByKey('user')
     soundcloudUserId = user.id
@@ -217,7 +217,7 @@ function scPlaylist () {
   soundcloudData = []
   playListURL = $('.playlistScraper input').val()
   $.get(playListURL, function (data, status) {
-    soundcloudData = getData(data, 10, 'window.__sc_hydration = ')
+    soundcloudData = getData(data, 'window.__sc_hydration = ')
     let playlist = getSCDataByKey('playlist')
     console.log(soundcloudData)
     console.log(playlist)
@@ -331,11 +331,13 @@ function createDom (data) {
   return parser.parseFromString(data, 'text/html')
 }
 
-function getData (data, index, string) {
+function getData (data, string) {
   // console.log(string)
-  // console.log(index)
   // console.log($(createDom(data))[0].scripts)
-  // return
+  index = $.map($(createDom(data))[0].scripts, function (script, i) {
+    if (script.innerText.includes(string)) return i
+  })[0]
+  console.log(index)
   return JSON.parse(
     $(createDom(data))[0]
       .scripts[index].innerText.slice(0, -1)
