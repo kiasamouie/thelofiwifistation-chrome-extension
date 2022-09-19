@@ -22,7 +22,7 @@
     "default_popup": "popup.html"
   },
   "host_permissions": ["https://www.googleapis.com/*"],
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "activeTab"],
   "commands": {
     "_execute_action": {
       "suggested_key": {

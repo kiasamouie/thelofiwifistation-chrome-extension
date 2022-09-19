@@ -79,11 +79,11 @@ function checkYoutubeWatchUrl () {
 }
 
 function populateYoutubeVideos () {
-  $.each(videos, function (i) {
+  $.each(videos, function (i, video) {
     $('<a/>', {
       target: '_blank',
-      text: videos[i].name,
-      href: 'https://www.youtube.com/watch?v=' + videos[i].videoId
+      text: video.name,
+      href: 'https://www.youtube.com/watch?v=' + video.videoId
     }).appendTo(
       $('<li/>', {
         class: 'list-group-item'
@@ -101,6 +101,9 @@ function InitEventHandlers () {
   $('.userScraper button').click(scUser)
   $('.userLastTracks button').click(scUserLastTracks)
   $('.ytDescription button').click(ytDescription)
+  $('.options button.downloadsongs').click(downloadsongs)
+  $('.options button.reset').click(reset)
+  $('.options button.permalinks').click(permalinks)
   $('.fa').click(function () {
     toggleVideo(
       $(this)
@@ -178,6 +181,34 @@ function ytDescription () {
     // download(tracks, user.permalink + ' - tracks.json')
   })
 }
+
+function permalinks () {
+  chrome.tabs.query({ currentWindow: true }, function (tabs) {
+    var activeTab = $.grep(tabs, function (tab) {
+      return tab.active
+    })[0]
+    chrome.tabs.sendMessage(activeTab.id, {
+      message: 'get-permalinks'
+    })
+  })
+}
+function reset () {
+  console.log(localStorage)
+  localStorage.clear()
+  console.log(localStorage)
+}
+
+function downloadsongs () {
+  chrome.tabs.query({ currentWindow: true }, function (tabs) {
+    var activeTab = $.grep(tabs, function (tab) {
+      return tab.active
+    })[0]
+    chrome.tabs.sendMessage(activeTab.id, {
+      message: 'download'
+    })
+  })
+}
+
 function scUser () {
   soundcloudData = []
   userURL = $('.userScraper input').val()
@@ -248,6 +279,7 @@ function scrapeScPlaylistTracks (ids) {
       '&app_locale=' +
       app_locale,
     function (res, status) {
+      console.log(scPlaylistTracks.permalink_url)
       scPlaylistTracks = merge(scPlaylistTracks, res)
       console.log(scPlaylistTracks)
     }
