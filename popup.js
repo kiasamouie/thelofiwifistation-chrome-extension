@@ -4,6 +4,7 @@
 $.ajaxSetup({ async: false })
 InitDateTime()
 var scPlaylistTracks = []
+var playlistData = []
 var youtubeVideos = []
 var souncloudData = []
 var musicStatus = 'Playing...'
@@ -263,12 +264,13 @@ function scPlaylist () {
         scrapeScPlaylistTracks(encodeURIComponent(ids))
       }
     )
-    download(scPlaylistTracks, playlist.title + '.json')
-    scPlaylistTracks = []
+    download(playlistData, playlist.title + '.json')
+    playlistData = []
   })
 }
 function scrapeScPlaylistTracks (ids) {
   console.log(ids)
+  let links = []
   $.get(
     'https://api-v2.soundcloud.com/tracks?ids=' +
       ids +
@@ -279,9 +281,11 @@ function scrapeScPlaylistTracks (ids) {
       '&app_locale=' +
       app_locale,
     function (res, status) {
-      console.log(scPlaylistTracks.permalink_url)
-      scPlaylistTracks = merge(scPlaylistTracks, res)
-      console.log(scPlaylistTracks)
+      $.each(res, function (i, playlist) {
+        links.push(playlist.permalink_url)
+      })
+      playlistData = merge(playlistData, links)
+      console.log(links)
     }
   )
 }
