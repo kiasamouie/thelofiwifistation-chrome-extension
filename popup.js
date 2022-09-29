@@ -147,6 +147,7 @@ function ytVideos () {
             .sectionListRenderer.contents[0].itemSectionRenderer.contents[0]
             .gridRenderer.items,
           function (v, i) {
+            if (!v.gridVideoRenderer) return
             return {
               name: v.gridVideoRenderer.title.runs[0].text,
               videoId: v.gridVideoRenderer.videoId
