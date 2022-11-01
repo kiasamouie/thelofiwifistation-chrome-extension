@@ -1,6 +1,7 @@
 // chrome.runtime.getBackgroundPage(function (backgroundPage) {
 //   console.log(backgroundPage)
 // })
+const zeroPad = (num, places) => String(num).padStart(places, '0')
 $.ajaxSetup({ async: false })
 InitDateTime()
 var scPlaylistTracks = []
@@ -54,11 +55,11 @@ $(document).ready(function () {
   $('.musicStatus').text(musicStatus)
 })
 
-function Class (className, substr) {
+function Class(className, substr) {
   return className.indexOf(substr) > 0
 }
 
-function InitDateTime () {
+function InitDateTime() {
   var interval = setInterval(function () {
     var now = moment()
     $('#date').html(now.format('dddd, MMMM Do YYYY '))
@@ -66,7 +67,7 @@ function InitDateTime () {
   }, 100)
 }
 
-function checkYoutubeWatchUrl () {
+function checkYoutubeWatchUrl() {
   chrome.tabs.query({}, function (tabs) {
     $.map(tabs, function (v, i) {
       if (v.url.includes('youtube.com/watch')) {
@@ -79,7 +80,7 @@ function checkYoutubeWatchUrl () {
   })
 }
 
-function populateYoutubeVideos () {
+function populateYoutubeVideos() {
   $.each(videos, function (i, video) {
     $('<a/>', {
       target: '_blank',
@@ -93,7 +94,7 @@ function populateYoutubeVideos () {
   })
 }
 
-function InitEventHandlers () {
+function InitEventHandlers() {
   $('#showSC').change(function () {
     showHideField($('.showSC'), this.checked)
     $('.list-group').css({ 'max-height': this.checked ? '254px' : '280px' })
@@ -114,24 +115,24 @@ function InitEventHandlers () {
   })
 }
 
-function populateSocials () {
+function populateSocials() {
   $('.logo').attr('href', socials.youtube)
   $('.socials a').each(function () {
     $(this).attr(
       'href',
       socials[
-        $(this)
-          .attr('class')
-          .split('-')[1]
+      $(this)
+        .attr('class')
+        .split('-')[1]
       ]
     )
   })
 }
 
-function showHideField (field, bool) {
+function showHideField(field, bool) {
   bool ? field.show() : field.hide()
 }
-function ytVideos () {
+function ytVideos() {
   //Get data from localStorage if today or from YT videos
   let youtubeVideos =
     (localStorage.timestamp &&
@@ -142,15 +143,13 @@ function ytVideos () {
     console.log(
       $.get(socials.youtube + '/videos', function (data, status) {
         youtubeVideos = $.map(
-          getData(data, 'var ytInitialData = ').contents
-            .twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content
-            .sectionListRenderer.contents[0].itemSectionRenderer.contents[0]
-            .gridRenderer.items,
+          getData(data, 'var ytInitialData = ')
+            .contents.twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content.richGridRenderer.contents,
           function (v, i) {
-            if (!v.gridVideoRenderer) return
+            if (!v.richItemRenderer) return
             return {
-              name: v.gridVideoRenderer.title.runs[0].text,
-              videoId: v.gridVideoRenderer.videoId
+              name: v.richItemRenderer.content.videoRenderer.title.runs[0].text,
+              videoId: v.richItemRenderer.content.videoRenderer.videoId
             }
           }
         )
@@ -168,14 +167,14 @@ function ytVideos () {
   $('.yt_player_iframe').attr(
     'src',
     'http://www.youtube.com/embed/' +
-      liveStream.videoId +
-      '?' +
-      jQuery.param(videoParams)
+    liveStream.videoId +
+    '?' +
+    jQuery.param(videoParams)
   )
   console.log(youtubeVideos)
   return youtubeVideos
 }
-function ytDescription () {
+function ytDescription() {
   ytDescriptionURL = $('.ytDescription input').val()
   $.get(ytDescriptionURL, function (data, status) {
     data = getData(data, 'var ytInitialData = ')
@@ -184,7 +183,7 @@ function ytDescription () {
   })
 }
 
-function permalinks () {
+function permalinks() {
   chrome.tabs.query({ currentWindow: true }, function (tabs) {
     var activeTab = $.grep(tabs, function (tab) {
       return tab.active
@@ -194,13 +193,13 @@ function permalinks () {
     })
   })
 }
-function reset () {
+function reset() {
   console.log(localStorage)
   localStorage.clear()
   console.log(localStorage)
 }
 
-function downloadsongs () {
+function downloadsongs() {
   chrome.tabs.query({ currentWindow: true }, function (tabs) {
     var activeTab = $.grep(tabs, function (tab) {
       return tab.active
@@ -211,7 +210,7 @@ function downloadsongs () {
   })
 }
 
-function scUser () {
+function scUser() {
   soundcloudData = []
   userURL = $('.userScraper input').val()
   $.get(userURL, function (data, status) {
@@ -224,7 +223,7 @@ function scUser () {
     download(tracks, user.permalink + ' - tracks.json')
   })
 }
-function scUserTracks (user) {
+function scUserTracks(user) {
   console.log(user)
   let limit = $('.userLastTracks .limit')
   let id = $('.userLastTracks .id')
@@ -234,19 +233,19 @@ function scUserTracks (user) {
   limit.removeAttr('disabled')
   return $.get(
     'https://api-v2.soundcloud.com/users/' +
-      user.id +
-      '/tracks?representation=&client_id=' +
-      client_id +
-      '&app_version=' +
-      app_version +
-      '&app_locale=' +
-      app_locale,
+    user.id +
+    '/tracks?representation=&client_id=' +
+    client_id +
+    '&app_version=' +
+    app_version +
+    '&app_locale=' +
+    app_locale,
     function (res, status) {
       return res
     }
   ).responseJSON.collection
 }
-function scPlaylist () {
+function scPlaylist() {
   soundcloudData = []
   playListURL = $('.playlistScraper input').val()
   $.get(playListURL, function (data, status) {
@@ -269,40 +268,41 @@ function scPlaylist () {
     playlistData = []
   })
 }
-function scrapeScPlaylistTracks (ids) {
+function scrapeScPlaylistTracks(ids) {
   console.log(ids)
   let links = []
   $.get(
     'https://api-v2.soundcloud.com/tracks?ids=' +
-      ids +
-      '&client_id=' +
-      client_id +
-      '&app_version=' +
-      app_version +
-      '&app_locale=' +
-      app_locale,
+    ids +
+    '&client_id=' +
+    client_id +
+    '&app_version=' +
+    app_version +
+    '&app_locale=' +
+    app_locale,
     function (res, status) {
       $.each(res, function (i, playlist) {
-        links.push(playlist.permalink_url)
+        // links.push(zeroPad(i + 1, 2) +' - '+ playlist.id)
+        links.push(zeroPad(playlist.id))
       })
       playlistData = merge(playlistData, links)
       console.log(links)
     }
   )
 }
-function scUserLastTracks () {
+function scUserLastTracks() {
   limit = 10
   console.log(
     'https://api-v2.soundcloud.com/stream/users/' +
-      soundcloudUserId +
-      '?offset=2021-03-19T23:15:18.000Z,tracks,01011515467&limit=' +
-      limit +
-      '&client_id=' +
-      client_id +
-      '&app_version=' +
-      app_version +
-      '&app_locale=' +
-      app_locale
+    soundcloudUserId +
+    '?offset=2021-03-19T23:15:18.000Z,tracks,01011515467&limit=' +
+    limit +
+    '&client_id=' +
+    client_id +
+    '&app_version=' +
+    app_version +
+    '&app_locale=' +
+    app_locale
   )
   if (!soundcloudUserId) {
     alert('No SoundCloud ID')
@@ -310,21 +310,21 @@ function scUserLastTracks () {
   }
   $.get(
     'https://api-v2.soundcloud.com/stream/users/' +
-      soundcloudUserId +
-      '?offset=2021-03-19T23:15:18.000Z,tracks,01011515467&limit=' +
-      limit +
-      '&client_id=' +
-      client_id +
-      '&app_version=' +
-      app_version +
-      '&app_locale=' +
-      app_locale,
+    soundcloudUserId +
+    '?offset=2021-03-19T23:15:18.000Z,tracks,01011515467&limit=' +
+    limit +
+    '&client_id=' +
+    client_id +
+    '&app_version=' +
+    app_version +
+    '&app_locale=' +
+    app_locale,
     function (res, status) {
       console.log(res)
     }
   )
 }
-function toggleVideo (action) {
+function toggleVideo(action) {
   let currentAction = getKeyByValue(
     musicButtons,
     $('.musicStatus')
@@ -346,11 +346,11 @@ function toggleVideo (action) {
   showHideField($('.nowPlaying'), action == 'play')
 }
 
-function getKeyByValue (object, value) {
+function getKeyByValue(object, value) {
   return Object.keys(object).find(key => object[key] === value)
 }
 
-function download (data, fileName) {
+function download(data, fileName) {
   const a = document.createElement('a')
   a.href = URL.createObjectURL(
     new Blob([JSON.stringify(data, null, 2)], {
@@ -363,13 +363,13 @@ function download (data, fileName) {
   document.body.removeChild(a)
 }
 
-function createDom (data) {
+function createDom(data) {
   const parser = new DOMParser()
   return parser.parseFromString(data, 'text/html')
 }
 
-function getData (data, string) {
-  // console.log(string)
+function getData(data, string) {
+  console.log(string)
   // console.log($(createDom(data))[0].scripts)
   index = $.map($(createDom(data))[0].scripts, function (script, i) {
     if (script.innerText.includes(string)) return i
@@ -382,13 +382,13 @@ function getData (data, string) {
   )
 }
 
-function getSCDataByKey (key) {
+function getSCDataByKey(key) {
   return $.grep(soundcloudData, function (v, i) {
     return v.hydratable === key
   })[0].data
 }
 
-function chunk (array, size) {
+function chunk(array, size) {
   let result = []
   for (value of array) {
     let lastArray = result[result.length - 1]
