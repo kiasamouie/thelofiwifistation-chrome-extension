@@ -20,6 +20,12 @@ var socials = {
   instagram: 'https://www.instagram.com/thelofiwifistation',
   twitter: 'https://twitter.com/LofiWifiStation'
 }
+var youtube_content = {}
+var youtube_urls = {
+  "1": 'videos',
+  "2": 'shorts',
+  "3": 'streams',
+}
 var musicButtons = {
   stop: 'Stopped',
   play: 'Playing',
@@ -47,8 +53,9 @@ console.log(client_id)
 var soundcloudUserId
 
 $(document).ready(function () {
-  videos = ytVideos()
-  populateYoutubeVideos()
+  get_youtube_content()
+  console.log(youtube_content)
+  populate_youtube_content()
   checkYoutubeWatchUrl()
   InitEventHandlers()
   populateSocials()
@@ -80,17 +87,21 @@ function checkYoutubeWatchUrl() {
   })
 }
 
-function populateYoutubeVideos() {
-  $.each(videos, function (i, video) {
-    $('<a/>', {
-      target: '_blank',
-      text: video.name,
-      href: 'https://www.youtube.com/watch?v=' + video.videoId
-    }).appendTo(
-      $('<li/>', {
-        class: 'list-group-item'
-      }).appendTo($('.ytVideos'))
-    )
+function populate_youtube_content() {
+  $.each(youtube_content, function (type) {
+    content = youtube_content[type]
+    url_action = type != 'shorts' ? 'watch?v=' : 'shorts/'  
+    $.each(content, function (i, video) {
+      $('<a/>', {
+        target: '_blank',
+        text: video.name,
+        href: `https://www.youtube.com/${url_action}${video.videoId}`
+      }).appendTo(
+        $('<li/>', {
+          class: 'list-group-item'
+        }).appendTo($(`#${type} ul`))
+      )
+    })
   })
 }
 
@@ -102,8 +113,6 @@ function InitEventHandlers() {
   $('.playlistScraper button').click(scPlaylist)
   $('.userScraper button').click(scUser)
   $('.userLastTracks button').click(scUserLastTracks)
-  $('.ytDescription button').click(ytDescription)
-  $('.options button.downloadsongs').click(downloadsongs)
   $('.options button.reset').click(reset)
   $('.options button.permalinks').click(permalinks)
   $('.fa').click(function () {
@@ -132,38 +141,27 @@ function populateSocials() {
 function showHideField(field, bool) {
   bool ? field.show() : field.hide()
 }
-function ytVideos() {
-  //Get data from localStorage if today or from YT videos
-  let youtubeVideos =
-    (localStorage.timestamp &&
-      moment(localStorage.timestamp).isSame(moment(), 'day') &&
-      JSON.parse(localStorage.youtubeVideos)) ||
-    []
-  if (!youtubeVideos.length) {
-    console.log(
-      $.get(socials.youtube + '/videos', function (data, status) {
-        youtubeVideos = $.map(
-          getData(data, 'var ytInitialData = ')
-            .contents.twoColumnBrowseResultsRenderer.tabs[1].tabRenderer.content.richGridRenderer.contents,
-          function (v, i) {
-            if (!v.richItemRenderer) return
-            return {
-              name: v.richItemRenderer.content.videoRenderer.title.runs[0].text,
-              videoId: v.richItemRenderer.content.videoRenderer.videoId
-            }
+
+function get_youtube_content() {
+  youtube_content = (localStorage.timestamp && moment(localStorage.timestamp).isSame(moment(), 'day') && JSON.parse(localStorage.youtube_content)) || {}
+  if (!Object.keys(youtube_content).length) {
+    $.each(youtube_urls, function (action_tab, action) {
+      $.get(socials.youtube + `/${action}`, function (data, status) {
+        var contents = getData(data, 'var ytInitialData = ').contents.twoColumnBrowseResultsRenderer.tabs[action_tab].tabRenderer.content.richGridRenderer.contents
+        youtube_content[youtube_urls[action_tab]] = $.map(contents, function (v) {
+          let content = v.richItemRenderer.content
+          return {
+            name: content.hasOwnProperty('videoRenderer') ? content.videoRenderer.title.runs[0].text : content.reelItemRenderer.headline.simpleText,
+            videoId: content.hasOwnProperty('videoRenderer') ? content.videoRenderer.videoId : content.reelItemRenderer.videoId
           }
-        )
-        localStorage.setItem('timestamp', moment().format('YYYY-MM-DD'))
-        localStorage.setItem('youtubeVideos', JSON.stringify(youtubeVideos))
+        })
       })
-    )
+    })
+    localStorage.setItem('timestamp', moment().format('YYYY-MM-DD'))
+    localStorage.setItem('youtube_content', JSON.stringify(youtube_content))
   }
-  liveStream = youtubeVideos.splice(
-    youtubeVideos.findIndex(x => x.name.includes('24/7')),
-    1
-  )[0]
-  youtubeVideos.unshift(liveStream)
-  $('.nowPlaying').text(liveStream.name.split(' - ')[0])
+  liveStream = youtube_content.streams[0]
+  $('.nowPlaying').text(liveStream.name.split(' | ')[0])
   $('.yt_player_iframe').attr(
     'src',
     'http://www.youtube.com/embed/' +
@@ -171,16 +169,6 @@ function ytVideos() {
     '?' +
     jQuery.param(videoParams)
   )
-  console.log(youtubeVideos)
-  return youtubeVideos
-}
-function ytDescription() {
-  ytDescriptionURL = $('.ytDescription input').val()
-  $.get(ytDescriptionURL, function (data, status) {
-    data = getData(data, 'var ytInitialData = ')
-    console.log(data)
-    // download(tracks, user.permalink + ' - tracks.json')
-  })
 }
 
 function permalinks() {
@@ -197,17 +185,6 @@ function reset() {
   console.log(localStorage)
   localStorage.clear()
   console.log(localStorage)
-}
-
-function downloadsongs() {
-  chrome.tabs.query({ currentWindow: true }, function (tabs) {
-    var activeTab = $.grep(tabs, function (tab) {
-      return tab.active
-    })[0]
-    chrome.tabs.sendMessage(activeTab.id, {
-      message: 'download'
-    })
-  })
 }
 
 function scUser() {
@@ -250,8 +227,8 @@ function scPlaylist() {
   playListURL = $('.playlistScraper input').val()
   $.get(playListURL, function (data, status) {
     soundcloudData = getData(data, 'window.__sc_hydration = ')
-    let playlist = getSCDataByKey('playlist')
     console.log(soundcloudData)
+    let playlist = getSCDataByKey('playlist')
     console.log(playlist)
     $.each(
       chunk(
@@ -369,12 +346,17 @@ function createDom(data) {
 }
 
 function getData(data, string) {
-  console.log(string)
+  // console.log(string)
   // console.log($(createDom(data))[0].scripts)
   index = $.map($(createDom(data))[0].scripts, function (script, i) {
     if (script.innerText.includes(string)) return i
   })[0]
-  console.log(index)
+  // console.log(index)
+  console.log(JSON.parse(
+    $(createDom(data))[0]
+      .scripts[index].innerText.slice(0, -1)
+      .replace(string, '')
+  ))
   return JSON.parse(
     $(createDom(data))[0]
       .scripts[index].innerText.slice(0, -1)

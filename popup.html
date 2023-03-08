@@ -32,9 +32,9 @@
 				<i class="fa fa-play"></i>
 				<i class="fa fa-stop"></i>
 				<p class="musicStatus mb-0"></p>
-				<p class="nowPlaying mb-0"></p>
+				<p class="nowPlaying mb-1"></p>
 			</div>
-			<div class="form-group socials pb-1">
+			<div class="form-group socials p-1">
 				<a target="_blank" href="#" class="fa fa-youtube"></a>
 				<a target="_blank" href="#" class="fa fa-soundcloud" style="padding-left: 7px;"></a>
 				<a target="_blank" href="#" class="fa fa-spotify"></a>
@@ -42,47 +42,59 @@
 				<a target="_blank" href="#" class="fa fa-twitter"></a>
 			</div>
 			<div class="col-xs-12 mb-2">
-				<ul class="list-group shadow-lg ytVideos">
+				<ul class="nav nav-pills m-1">
+					<li class="nav-item">
+						<a href="#videos" class="nav-link active" data-bs-toggle="tab">Videos</a>
+					</li>
+					<li class="nav-item">
+						<a href="#shorts" class="nav-link" data-bs-toggle="tab">Shorts</a>
+					</li>
+					<li class="nav-item">
+						<a href="#streams" class="nav-link" data-bs-toggle="tab">Streams</a>
+					</li>
 				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="videos">
+						<ul class="list-group shadow-lg"></ul>
+					</div>
+					<div class="tab-pane fade" id="shorts">
+						<ul class="list-group shadow-lg"></ul>
+					</div>
+					<div class="tab-pane fade" id="streams">
+						<ul class="list-group shadow-lg"></ul>
+					</div>
+				</div>
 			</div>
-			<iframe class="yt_player_iframe" src="" allowfullscreen="false" allowscriptaccess="always"
-				frameborder="0"></iframe>
 		</div>
-		<div class="row showSC mb-1" style="display: none;">
-			<h5 class="text-muted">Soundcloud Scraper</h5>
-			<div class="input-group mb-1 playlistScraper">
-				<input class="form-control" value="https://soundcloud.com/sebastian-lopez-49626625/sets/lofi-remixes" />
-				<button type="button" class="input-group-text">Playlist</button>
-			</div>
-			<div class="input-group mb-1 userScraper">
-				<input class="form-control" value="https://soundcloud.com/thekiadoe" />
-				<button type="button" class="input-group-text">User</button>
-			</div>
-			<div class="input-group mb-1 options">
-				<button type="button" class="input-group-text downloadsongs">Download</button>
-				<button type="button" class="input-group-text reset">Reset</button>
-				<button type="button" class="input-group-text permalinks">Permalinks</button>
-			</div>
-			<!-- <div class="input-group mb-1 userLastTracks">
-				<input class="form-control limit" disabled value="10" />
-				<input class="form-control id" disabled />
-				<button type="button" class="input-group-text">Last Tracks</button>
-			</div> -->
-			<!-- <div class="input-group mb-1 ytDescription">
-				<input class="form-control" value="https://www.youtube.com/watch?v=ZYwHT4OwNiE" />
-				<button type="button" class="input-group-text">Descrip</button>
-			</div> -->
-			<!-- <div class="input-group mb-1 search">
-				<input class="form-control" value="" disabled />
-				<button type="button" class="input-group-text">Search</button>
-			</div> -->
+		<iframe class="yt_player_iframe" src="" allowfullscreen="false" allowscriptaccess="always"
+			frameborder="0"></iframe>
+	</div>
+	<div class="row showSC mb-1" style="display: none;">
+		<h5 class="text-muted">Soundcloud Scraper</h5>
+		<div class="input-group mb-1 playlistScraper">
+			<input class="form-control" value="https://soundcloud.com/sebastian-lopez-49626625/sets/lofi-remixes" />
+			<button type="button" class="input-group-text">Playlist</button>
 		</div>
+		<div class="input-group mb-1 userScraper">
+			<input class="form-control" value="https://soundcloud.com/thekiadoe" />
+			<button type="button" class="input-group-text">User</button>
+		</div>
+		<div class="input-group mb-1 options">
+			<button type="button" class="input-group-text downloadsongs">Download</button>
+			<button type="button" class="input-group-text reset">Reset</button>
+			<button type="button" class="input-group-text permalinks">Permalinks</button>
+		</div>
+	</div>
 	</div>
 </body>
 
 
 </html>
 <style type="text/css">
+	.nav {
+		display: inline-flex!important;
+	}
+
 	::-webkit-scrollbar {
 		width: 10px;
 	}
@@ -104,9 +116,9 @@
 	}
 
 	body {
-		height: 100%;
 		width: 392px;
-		background-color: rgba(80, 252, 255, 0.753);
+		height: 100%;
+		background-color: rgba(45, 223, 255, 0.753);
 		font-family: cursive;
 
 	}
@@ -220,5 +232,17 @@
 	.logo {
 		z-index: 998;
 		cursor: pointer;
+	}
+
+	.nav-link.active,
+	.nav-link:focus,
+	.nav-link:hover {
+		background-color: transparent;
+		border-color: transparent;
+		border-bottom: 3px solid #1aafff;
+	}
+
+	a.nav-link {
+		color: #333;
 	}
 </style>
