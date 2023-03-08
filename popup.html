@@ -12,8 +12,8 @@
 	<script src="popup.js"></script>
 </head>
 
-<div class="position-absolute w-100 showSCChk">
-	<input type="checkbox" id="showSC" class="form-check-input">
+<div class="position-absolute w-100 checkbox">
+	<input type="checkbox" id="reset" class="form-check-input">
 </div>
 <div class="position-absolute w-100 datetime">
 	<div id='date'></div>
@@ -36,7 +36,7 @@
 			</div>
 			<div class="form-group socials p-1">
 				<a target="_blank" href="#" class="fa fa-youtube"></a>
-				<a target="_blank" href="#" class="fa fa-soundcloud" style="padding-left: 7px;"></a>
+				<a target="_blank" href="#" class="fa fa-soundcloud" style="padding-left: 5px;"></a>
 				<a target="_blank" href="#" class="fa fa-spotify"></a>
 				<a target="_blank" href="#" class="fa fa-instagram"></a>
 				<a target="_blank" href="#" class="fa fa-twitter"></a>
@@ -52,6 +52,9 @@
 					<li class="nav-item">
 						<a href="#streams" class="nav-link" data-bs-toggle="tab">Streams</a>
 					</li>
+					<li class="nav-item">
+						<a href="#nowPlaying" class="nav-link" data-bs-toggle="tab">Now Playing</a>
+					</li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane fade show active" id="videos">
@@ -63,28 +66,14 @@
 					<div class="tab-pane fade" id="streams">
 						<ul class="list-group shadow-lg"></ul>
 					</div>
+					<div class="tab-pane fade" id="nowPlaying">
+						Coming soon...
+					</div>
 				</div>
 			</div>
 		</div>
 		<iframe class="yt_player_iframe" src="" allowfullscreen="false" allowscriptaccess="always"
 			frameborder="0"></iframe>
-	</div>
-	<div class="row showSC mb-1" style="display: none;">
-		<h5 class="text-muted">Soundcloud Scraper</h5>
-		<div class="input-group mb-1 playlistScraper">
-			<input class="form-control" value="https://soundcloud.com/sebastian-lopez-49626625/sets/lofi-remixes" />
-			<button type="button" class="input-group-text">Playlist</button>
-		</div>
-		<div class="input-group mb-1 userScraper">
-			<input class="form-control" value="https://soundcloud.com/thekiadoe" />
-			<button type="button" class="input-group-text">User</button>
-		</div>
-		<div class="input-group mb-1 options">
-			<button type="button" class="input-group-text downloadsongs">Download</button>
-			<button type="button" class="input-group-text reset">Reset</button>
-			<button type="button" class="input-group-text permalinks">Permalinks</button>
-		</div>
-	</div>
 	</div>
 </body>
 
@@ -92,7 +81,7 @@
 </html>
 <style type="text/css">
 	.nav {
-		display: inline-flex!important;
+		display: inline-flex !important;
 	}
 
 	::-webkit-scrollbar {
@@ -116,7 +105,7 @@
 	}
 
 	body {
-		width: 392px;
+		width: 412px;
 		height: 100%;
 		background-color: rgba(45, 223, 255, 0.753);
 		font-family: cursive;
@@ -132,7 +121,11 @@
 		font-size: 14px;
 	}
 
-	.showSCChk {
+	.extra-buttons {
+		display: none;
+	}
+
+	.checkbox {
 		z-index: 999;
 		left: 8px;
 		top: 1px
@@ -161,7 +154,7 @@
 		font-size: 35px;
 		text-decoration: none;
 		border-radius: 50%;
-		width: 16%;
+		width: 15%;
 	}
 
 	.fa:hover {

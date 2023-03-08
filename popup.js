@@ -52,20 +52,6 @@ $.getJSON('config.json', function (json) {
 console.log(client_id)
 var soundcloudUserId
 
-$(document).ready(function () {
-  get_youtube_content()
-  console.log(youtube_content)
-  populate_youtube_content()
-  checkYoutubeWatchUrl()
-  InitEventHandlers()
-  populateSocials()
-  $('.musicStatus').text(musicStatus)
-})
-
-function Class(className, substr) {
-  return className.indexOf(substr) > 0
-}
-
 function InitDateTime() {
   var interval = setInterval(function () {
     var now = moment()
@@ -74,73 +60,16 @@ function InitDateTime() {
   }, 100)
 }
 
-function checkYoutubeWatchUrl() {
-  chrome.tabs.query({}, function (tabs) {
-    $.map(tabs, function (v, i) {
-      if (v.url.includes('youtube.com/watch')) {
-        var i = setInterval(function () {
-          toggleVideo('stop')
-          clearInterval(i)
-        }, 500)
-      }
-    })
-  })
-}
+$(document).ready(function () {
+  get_youtube_content()
+  console.log(youtube_content)
+  populate_youtube_content()
+  check_tabs_for_watch_url()
+  init_event_handlers()
+  populate_socials()
+  $('.musicStatus').text(musicStatus)
+})
 
-function populate_youtube_content() {
-  $.each(youtube_content, function (type) {
-    content = youtube_content[type]
-    url_action = type != 'shorts' ? 'watch?v=' : 'shorts/'  
-    $.each(content, function (i, video) {
-      $('<a/>', {
-        target: '_blank',
-        text: video.name,
-        href: `https://www.youtube.com/${url_action}${video.videoId}`
-      }).appendTo(
-        $('<li/>', {
-          class: 'list-group-item'
-        }).appendTo($(`#${type} ul`))
-      )
-    })
-  })
-}
-
-function InitEventHandlers() {
-  $('#showSC').change(function () {
-    showHideField($('.showSC'), this.checked)
-    $('.list-group').css({ 'max-height': this.checked ? '254px' : '280px' })
-  })
-  $('.playlistScraper button').click(scPlaylist)
-  $('.userScraper button').click(scUser)
-  $('.userLastTracks button').click(scUserLastTracks)
-  $('.options button.reset').click(reset)
-  $('.options button.permalinks').click(permalinks)
-  $('.fa').click(function () {
-    toggleVideo(
-      $(this)
-        .attr('class')
-        .split('-')[1]
-    )
-  })
-}
-
-function populateSocials() {
-  $('.logo').attr('href', socials.youtube)
-  $('.socials a').each(function () {
-    $(this).attr(
-      'href',
-      socials[
-      $(this)
-        .attr('class')
-        .split('-')[1]
-      ]
-    )
-  })
-}
-
-function showHideField(field, bool) {
-  bool ? field.show() : field.hide()
-}
 
 function get_youtube_content() {
   youtube_content = (localStorage.timestamp && moment(localStorage.timestamp).isSame(moment(), 'day') && JSON.parse(localStorage.youtube_content)) || {}
@@ -162,13 +91,73 @@ function get_youtube_content() {
   }
   liveStream = youtube_content.streams[0]
   $('.nowPlaying').text(liveStream.name.split(' | ')[0])
-  $('.yt_player_iframe').attr(
-    'src',
-    'http://www.youtube.com/embed/' +
-    liveStream.videoId +
-    '?' +
-    jQuery.param(videoParams)
-  )
+  $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${liveStream.videoId}?${jQuery.param(videoParams)}`)
+}
+
+function populate_youtube_content() {
+  $.each(youtube_content, function (type) {
+    content = youtube_content[type]
+    url_action = type != 'shorts' ? 'watch?v=' : 'shorts/'
+    $.each(content, function (i, video) {
+      $('<a/>', {
+        target: '_blank',
+        text: video.name,
+        href: `https://www.youtube.com/${url_action}${video.videoId}`
+      }).appendTo(
+        $('<li/>', {
+          class: 'list-group-item'
+        }).appendTo($(`#${type} ul`))
+      )
+    })
+  })
+}
+
+function check_tabs_for_watch_url() {
+  chrome.tabs.query({}, function (tabs) {
+    $.map(tabs, function (v, i) {
+      if (v.url.includes('youtube.com/watch')) {
+        var i = setInterval(function () {
+          toggleVideo('stop')
+          clearInterval(i)
+        }, 500)
+      }
+    })
+  })
+}
+
+function init_event_handlers() {
+  $('#reset').change(function () {
+    this.checked && reset()
+    window.location.reload(true)
+  })
+  $('.fa').click(function () {
+    toggleVideo($(this).attr('class').split('-')[1])
+  })
+}
+
+function populate_socials() {
+  $('.logo').attr('href', `${socials.youtube}/videos`)
+  $('.socials a').each(function () {
+    $(this).attr('href', socials[$(this).attr('class').split('-')[1]])
+  })
+}
+
+function toggleVideo(action) {
+  let currentAction = getKeyByValue(musicButtons, $('.musicStatus').text().replace('...', ''))
+  if (musicButtons[action] == $('.musicStatus').text() || (action == 'pause' && currentAction == 'stop')) return
+  $('.yt_player_iframe').each(function () {
+    this.contentWindow.postMessage('{"event":"command","func":"' + action + 'Video","args":""}', '*')
+  })
+  $('.musicStatus').text(musicButtons[action] + '...')
+  showHideField($('.nowPlaying'), action == 'play')
+}
+
+function Class(className, substr) {
+  return className.indexOf(substr) > 0
+}
+
+function showHideField(field, bool) {
+  bool ? field.show() : field.hide()
 }
 
 function permalinks() {
@@ -300,27 +289,6 @@ function scUserLastTracks() {
       console.log(res)
     }
   )
-}
-function toggleVideo(action) {
-  let currentAction = getKeyByValue(
-    musicButtons,
-    $('.musicStatus')
-      .text()
-      .replace('...', '')
-  )
-  if (
-    musicButtons[action] == $('.musicStatus').text() ||
-    (action == 'pause' && currentAction == 'stop')
-  )
-    return
-  $('.yt_player_iframe').each(function () {
-    this.contentWindow.postMessage(
-      '{"event":"command","func":"' + action + 'Video","args":""}',
-      '*'
-    )
-  })
-  $('.musicStatus').text(musicButtons[action] + '...')
-  showHideField($('.nowPlaying'), action == 'play')
 }
 
 function getKeyByValue(object, value) {
