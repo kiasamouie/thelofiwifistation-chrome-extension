@@ -24,7 +24,7 @@ var videoParams = {
   version: 3,
   playerapiid: 'ytplayer'
 }
-var musicStatus = `$1...`
+var stream_status = `$1...`
 var interval = setInterval(function () {
   var now = moment()
   $('#date').html(now.format('dddd, MMMM Do YYYY '))
@@ -32,12 +32,13 @@ var interval = setInterval(function () {
 }, 100)
 
 $(document).ready(function () {
-  get_youtube_content()
-  populate_youtube_content()
-  check_tabs_for_watch_url()
-  init_event_handlers()
   populate_socials()
-  $('.music-status').text(musicStatus)
+  get_youtube_content()
+
+  $('#reset').change(function () {
+    this.checked && localStorage.clear()
+    window.location.reload(true)
+  })
 })
 
 function parse_html_response(data, string) {
@@ -68,14 +69,17 @@ function get_youtube_content() {
     localStorage.setItem('youtube_content', JSON.stringify(youtube_content))
   }
   console.log(youtube_content)
-  if (!youtube_content.hasOwnProperty('streams')) {
-    update_music_status('Stream not available')
-    return
+  if (youtube_content.hasOwnProperty('streams')) {
+    let liveStream = youtube_content.streams[0]
+    $('.now-playing').text(liveStream.name.split(' | ')[0])
+    $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${liveStream.videoId}?${jQuery.param(videoParams)}`)
+    init_event_handlers()
+    check_tabs_for_watch_url()
+    update_stream_status(now_playing_buttons['play'])
+  } else {
+    update_stream_status('Stream not available')
   }
-  let liveStream = youtube_content.streams[0]
-  $('.now-playing').text(liveStream.name.split(' | ')[0])
-  $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${liveStream.videoId}?${jQuery.param(videoParams)}`)
-  update_music_status(now_playing_buttons['play'])
+  populate_youtube_content()
 }
 
 function create_tabs_content() {
@@ -137,10 +141,6 @@ function check_tabs_for_watch_url() {
 }
 
 function init_event_handlers() {
-  $('#reset').change(function () {
-    this.checked && localStorage.clear()
-    window.location.reload(true)
-  })
   $('.fa').click(function () {
     toggle_video($(this).attr('class').split('-')[1])
   })
@@ -158,12 +158,12 @@ function get_key_by_value(object, value) {
 }
 
 function toggle_video(action) {
-  let currentAction = get_key_by_value(now_playing_buttons, $('.music-status').text().replace('...', ''))
-  if (now_playing_buttons[action] == $('.music-status').text() || (action == 'pause' && currentAction == 'stop')) return
+  let currentAction = get_key_by_value(now_playing_buttons, $('.stream-status').text().replace('...', ''))
+  if (now_playing_buttons[action] == $('.stream-status').text() || (action == 'pause' && currentAction == 'stop')) return
   $('.yt_player_iframe').each(function () {
     this.contentWindow.postMessage('{"event":"command","func":"' + action + 'Video","args":""}', '*')
   })
-  $('.music-status').text(`${now_playing_buttons[action]}...`)
+  $('.stream-status').text(`${now_playing_buttons[action]}...`)
 }
 
 function permalinks() {
@@ -177,8 +177,8 @@ function permalinks() {
   })
 }
 
-function update_music_status(status) {
-  musicStatus = musicStatus.replace('$1', status)
+function update_stream_status(status) {
+  $('.stream-status').text(`${status}...`)
 }
 
 String.prototype.capitalize = function () {
