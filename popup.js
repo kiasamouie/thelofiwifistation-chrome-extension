@@ -1,18 +1,5 @@
-// chrome.runtime.getBackgroundPage(function (backgroundPage) {
-//   console.log(backgroundPage)
-// })
 $.ajaxSetup({ async: false })
-String.prototype.capitalize = function () {
-  return this.charAt(0).toUpperCase() + this.slice(1)
-}
-const zeroPad = (num, places) => String(num).padStart(places, '0')
-var interval = setInterval(function () {
-  var now = moment()
-  $('#date').html(now.format('dddd, MMMM Do YYYY '))
-  $('#time').html(now.format('HH:mm:ss A'))
-}, 100)
-var musicStatus = 'Playing...'
-var nowPlaying = ''
+
 var socials = {
   youtube: 'https://www.youtube.com/c/THELOFIWIFISTATION',
   soundcloud: 'https://soundcloud.com/thelofiwifistation',
@@ -20,9 +7,7 @@ var socials = {
   instagram: 'https://www.instagram.com/thelofiwifistation',
   twitter: 'https://twitter.com/LofiWifiStation'
 }
-var youtube_content = {
-
-}
+var youtube_content = {}
 var youtube_urls = {
   "1": 'videos',
   "2": 'shorts',
@@ -39,21 +24,17 @@ var videoParams = {
   version: 3,
   playerapiid: 'ytplayer'
 }
+var musicStatus = 'Playing...'
+var nowPlaying = ''
 
-function request_data(data, string) {
-  const parser = new DOMParser()
-  let scripts = $(parser.parseFromString(data, 'text/html'))[0].scripts
-  index = $.map(scripts, function (script, i) {
-    if (script.innerText.includes(string)) return i
-  })[0]
-  let json = JSON.parse(scripts[index].innerText.slice(0, -1).replace(string, ''))
-  console.log(json)
-  return json
-}
+var interval = setInterval(function () {
+  var now = moment()
+  $('#date').html(now.format('dddd, MMMM Do YYYY '))
+  $('#time').html(now.format('HH:mm:ss A'))
+}, 100)
 
 $(document).ready(function () {
   get_youtube_content()
-  console.log(youtube_content)
   populate_youtube_content()
   check_tabs_for_watch_url()
   init_event_handlers()
@@ -61,13 +42,22 @@ $(document).ready(function () {
   $('.music-status').text(musicStatus)
 })
 
+function parse_html_response(data, string) {
+  const parser = new DOMParser()
+  let scripts = $(parser.parseFromString(data, 'text/html'))[0].scripts
+  let index = $.map(scripts, (script, i) => {if (script.innerText.includes(string)) return i})
+  let json = JSON.parse(scripts[index].innerText.slice(0, -1).replace(string, ''))
+  console.log(json)
+  return json
+}
+
 function get_youtube_content() {
   youtube_content = (localStorage.timestamp && moment(localStorage.timestamp).isSame(moment(), 'day') && JSON.parse(localStorage.youtube_content)) || {}
   if (!Object.keys(youtube_content).length) {
     $.each(youtube_urls, function (action_tab, action) {
       $.get(socials.youtube + `/${action}`, function (data, status) {
-        var contents = request_data(data, 'var ytInitialData = ').contents.twoColumnBrowseResultsRenderer.tabs[action_tab].tabRenderer.content.richGridRenderer.contents
-        youtube_content[youtube_urls[action_tab]] = $.map(contents, function (v) {
+        var contents = parse_html_response(data, 'var ytInitialData = ').contents.twoColumnBrowseResultsRenderer.tabs[action_tab].tabRenderer.content.richGridRenderer.contents
+        youtube_content[action] = $.map(contents, function (v) {
           let content = v.richItemRenderer.content
           return {
             name: content.hasOwnProperty('videoRenderer') ? content.videoRenderer.title.runs[0].text : content.reelItemRenderer.headline.simpleText,
@@ -79,9 +69,12 @@ function get_youtube_content() {
     localStorage.setItem('timestamp', moment().format('YYYY-MM-DD'))
     localStorage.setItem('youtube_content', JSON.stringify(youtube_content))
   }
-  let liveStream = youtube_content.streams[0]
-  $('.now-playing').text(liveStream.name.split(' | ')[0])
-  $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${liveStream.videoId}?${jQuery.param(videoParams)}`)
+  console.log(youtube_content)
+  if(youtube_content.hasOwnProperty('streams')){
+    let liveStream = youtube_content.streams[0]
+    $('.now-playing').text(liveStream.name.split(' | ')[0])
+    $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${liveStream.videoId}?${jQuery.param(videoParams)}`)
+  }
 }
 
 function populate_youtube_content() {
@@ -163,3 +156,8 @@ function Class(className, substr) {
 function showHideField(field, bool) {
   bool ? field.show() : field.hide()
 }
+
+String.prototype.capitalize = function () {
+  return this.charAt(0).toUpperCase() + this.slice(1)
+}
+const zeroPad = (num, places) => String(num).padStart(places, '0')
