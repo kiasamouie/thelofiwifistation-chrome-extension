@@ -24,7 +24,6 @@ var videoParams = {
   version: 3,
   playerapiid: 'ytplayer'
 }
-var stream_status = `$1...`
 var interval = setInterval(function () {
   var now = moment()
   $('#date').html(now.format('dddd, MMMM Do YYYY '))
@@ -69,16 +68,12 @@ function get_youtube_content() {
     localStorage.setItem('youtube_content', JSON.stringify(youtube_content))
   }
   console.log(youtube_content)
-  if (youtube_content.hasOwnProperty('streams')) {
-    let liveStream = youtube_content.streams[0]
-    $('.now-playing').text(liveStream.name.split(' | ')[0])
-    $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${liveStream.videoId}?${jQuery.param(videoParams)}`)
-    init_event_handlers()
-    check_tabs_for_watch_url()
-    update_stream_status(now_playing_buttons['play'])
-  } else {
-    update_stream_status('Stream not available')
-  }
+  let liveStream = youtube_content.hasOwnProperty('streams') ? youtube_content.streams[0] : youtube_content.videos[0]
+  $('.now-playing').text(liveStream.name.split(' | ')[0])
+  $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${liveStream.videoId}?${jQuery.param(videoParams)}`)
+  init_event_handlers()
+  check_tabs_for_watch_url()
+  update_stream_status(now_playing_buttons['play'])
   populate_youtube_content()
 }
 
@@ -163,7 +158,7 @@ function toggle_video(action) {
   $('.yt_player_iframe').each(function () {
     this.contentWindow.postMessage('{"event":"command","func":"' + action + 'Video","args":""}', '*')
   })
-  $('.stream-status').text(`${now_playing_buttons[action]}...`)
+  update_stream_status(now_playing_buttons[action])
 }
 
 function permalinks() {
