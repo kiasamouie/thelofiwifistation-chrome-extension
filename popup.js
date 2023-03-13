@@ -24,9 +24,7 @@ var videoParams = {
   version: 3,
   playerapiid: 'ytplayer'
 }
-var musicStatus = 'Playing...'
-var nowPlaying = ''
-
+var musicStatus = `$1...`
 var interval = setInterval(function () {
   var now = moment()
   $('#date').html(now.format('dddd, MMMM Do YYYY '))
@@ -45,7 +43,7 @@ $(document).ready(function () {
 function parse_html_response(data, string) {
   const parser = new DOMParser()
   let scripts = $(parser.parseFromString(data, 'text/html'))[0].scripts
-  let index = $.map(scripts, (script, i) => {if (script.innerText.includes(string)) return i})
+  let index = $.map(scripts, (script, i) => { if (script.innerText.includes(string)) return i })
   let json = JSON.parse(scripts[index].innerText.slice(0, -1).replace(string, ''))
   console.log(json)
   return json
@@ -70,14 +68,44 @@ function get_youtube_content() {
     localStorage.setItem('youtube_content', JSON.stringify(youtube_content))
   }
   console.log(youtube_content)
-  if(youtube_content.hasOwnProperty('streams')){
-    let liveStream = youtube_content.streams[0]
-    $('.now-playing').text(liveStream.name.split(' | ')[0])
-    $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${liveStream.videoId}?${jQuery.param(videoParams)}`)
+  if (!youtube_content.hasOwnProperty('streams')) {
+    update_music_status('Stream not available')
+    return
   }
+  let liveStream = youtube_content.streams[0]
+  $('.now-playing').text(liveStream.name.split(' | ')[0])
+  $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${liveStream.videoId}?${jQuery.param(videoParams)}`)
+  update_music_status(now_playing_buttons['play'])
+}
+
+function create_tabs_content() {
+  $.each(youtube_content, function (type) {
+    let active = type == 'videos' ? ' active' : ''
+    // nav
+    $('<a/>', {
+      class: `nav-link${active}`,
+      'data-bs-toggle': 'tab',
+      href: `#${type}`,
+      text: `${type.capitalize()}`
+    }).appendTo(
+      $('<li/>', {
+        class: 'nav-item'
+      }).appendTo($('.youtube-content ul.nav'))
+    )
+    // content
+    $('<ul/>', {
+      class: 'list-group shadow-lg',
+    }).appendTo(
+      $('<div/>', {
+        class: `tab-pane fade show${active}`,
+        id: `${type}`,
+      }).appendTo($('.youtube-content div.tab-content'))
+    )
+  })
 }
 
 function populate_youtube_content() {
+  create_tabs_content()
   $.each(youtube_content, function (type) {
     content = youtube_content[type]
     url_action = type != 'shorts' ? 'watch?v=' : 'shorts/'
@@ -100,7 +128,7 @@ function check_tabs_for_watch_url() {
     $.map(tabs, function (v, i) {
       if (v.url.includes('/watch') || v.url.includes('/shorts')) {
         var i = setInterval(function () {
-          toggleVideo('stop')
+          toggle_video('stop')
           clearInterval(i)
         }, 500)
       }
@@ -114,7 +142,7 @@ function init_event_handlers() {
     window.location.reload(true)
   })
   $('.fa').click(function () {
-    toggleVideo($(this).attr('class').split('-')[1])
+    toggle_video($(this).attr('class').split('-')[1])
   })
 }
 
@@ -125,12 +153,12 @@ function populate_socials() {
   })
 }
 
-function getKeyByValue(object, value) {
+function get_key_by_value(object, value) {
   return Object.keys(object).find(key => object[key] === value)
 }
 
-function toggleVideo(action) {
-  let currentAction = getKeyByValue(now_playing_buttons, $('.music-status').text().replace('...', ''))
+function toggle_video(action) {
+  let currentAction = get_key_by_value(now_playing_buttons, $('.music-status').text().replace('...', ''))
   if (now_playing_buttons[action] == $('.music-status').text() || (action == 'pause' && currentAction == 'stop')) return
   $('.yt_player_iframe').each(function () {
     this.contentWindow.postMessage('{"event":"command","func":"' + action + 'Video","args":""}', '*')
@@ -149,15 +177,10 @@ function permalinks() {
   })
 }
 
-function Class(className, substr) {
-  return className.indexOf(substr) > 0
-}
-
-function showHideField(field, bool) {
-  bool ? field.show() : field.hide()
+function update_music_status(status) {
+  musicStatus = musicStatus.replace('$1', status)
 }
 
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1)
 }
-const zeroPad = (num, places) => String(num).padStart(places, '0')
