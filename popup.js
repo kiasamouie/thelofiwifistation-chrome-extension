@@ -7,6 +7,7 @@ var socials = {
   instagram: 'https://www.instagram.com/thelofiwifistation',
   twitter: 'https://twitter.com/LofiWifiStation'
 }
+var live_stream = null
 var youtube_content = {}
 var youtube_urls = {
   "1": 'videos',
@@ -24,6 +25,7 @@ var videoParams = {
   version: 3,
   playerapiid: 'ytplayer'
 }
+var now_playing_video = 0
 var interval = setInterval(function () {
   var now = moment()
   $('#date').html(now.format('dddd, MMMM Do YYYY '))
@@ -33,11 +35,9 @@ var interval = setInterval(function () {
 $(document).ready(function () {
   populate_socials()
   get_youtube_content()
-
-  $('#reset').change(function () {
-    this.checked && localStorage.clear()
-    window.location.reload(true)
-  })
+  populate_youtube_content()
+  init_event_handlers()
+  check_tabs_for_watch_url()
 })
 
 function parse_html_response(data, string) {
@@ -68,13 +68,12 @@ function get_youtube_content() {
     localStorage.setItem('youtube_content', JSON.stringify(youtube_content))
   }
   console.log(youtube_content)
-  let liveStream = youtube_content.hasOwnProperty('streams') ? youtube_content.streams[0] : youtube_content.videos[0]
-  $('.now-playing').text(liveStream.name.split(' | ')[0])
-  $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${liveStream.videoId}?${jQuery.param(videoParams)}`)
-  init_event_handlers()
-  check_tabs_for_watch_url()
-  update_stream_status(now_playing_buttons['play'])
-  populate_youtube_content()
+  let stream_status = 'Stream Unavailable'
+  if(youtube_content.hasOwnProperty('streams')){
+    live_stream = youtube_content.streams
+    stream_status = now_playing_buttons['play']
+  }
+  init_track(stream_status)
 }
 
 function create_tabs_content() {
@@ -85,7 +84,7 @@ function create_tabs_content() {
       class: `nav-link${active}`,
       'data-bs-toggle': 'tab',
       href: `#${type}`,
-      text: `${type.capitalize()}`
+      text: type.capitalize()
     }).appendTo(
       $('<li/>', {
         class: 'nav-item'
@@ -97,7 +96,7 @@ function create_tabs_content() {
     }).appendTo(
       $('<div/>', {
         class: `tab-pane fade show${active}`,
-        id: `${type}`,
+        id: type,
       }).appendTo($('.youtube-content div.tab-content'))
     )
   })
@@ -136,8 +135,13 @@ function check_tabs_for_watch_url() {
 }
 
 function init_event_handlers() {
+  $('#reset').change(function () {
+    this.checked && localStorage.clear()
+    window.location.reload(true)
+  })
   $('.fa').click(function () {
-    toggle_video($(this).attr('class').split('-')[1])
+    let _class = $(this).attr('class')
+    toggle_video(_class.slice(_class.lastIndexOf('-')+1,_class.length))
   })
 }
 
@@ -154,11 +158,25 @@ function get_key_by_value(object, value) {
 
 function toggle_video(action) {
   let currentAction = get_key_by_value(now_playing_buttons, $('.stream-status').text().replace('...', ''))
-  if (now_playing_buttons[action] == $('.stream-status').text() || (action == 'pause' && currentAction == 'stop')) return
-  $('.yt_player_iframe').each(function () {
-    this.contentWindow.postMessage('{"event":"command","func":"' + action + 'Video","args":""}', '*')
-  })
-  update_stream_status(now_playing_buttons[action])
+  if (now_playing_buttons[action] == $('.stream-status').text() || (action == 'pause' && currentAction == 'stop') || !live_stream) return
+  if($.inArray(action,['prev','next']) !== -1){
+    if(action == 'prev' && now_playing_video >=1) now_playing_video -= 1
+    if(action == 'next'&& now_playing_video < live_stream.length) now_playing_video += 1
+    action = 'play'
+  } else {
+    $('.yt_player_iframe').each(function () {
+      this.contentWindow.postMessage(`{"event":"command","func":"${action}Video","args":""}`, '*')
+    })
+  }
+  init_track(now_playing_buttons[action])
+}
+
+function init_track(stream_status){
+  update_stream_status(stream_status)
+  if (!live_stream) return
+  let video = live_stream[now_playing_video]
+  $('.now-playing').text(video.name.split(' | ')[0])
+  $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${video.videoId}?${jQuery.param(videoParams)}`)
 }
 
 function permalinks() {
@@ -172,8 +190,8 @@ function permalinks() {
   })
 }
 
-function update_stream_status(status) {
-  $('.stream-status').text(`${status}...`)
+function update_stream_status(stream_status) {
+  $('.stream-status').text(`${stream_status}...`)
 }
 
 String.prototype.capitalize = function () {

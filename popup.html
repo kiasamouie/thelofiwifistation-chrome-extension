@@ -27,13 +27,17 @@
 				<a class="logo" target="_blank"><img src="/logo/logo.png" alt="TheLoFiWiFiStation" width="150"height="150"></a>
 			</div>
 			<div class="position-absolute music">
-				<i class="fa fa-pause"></i>
-				<i class="fa fa-play"></i>
-				<i class="fa fa-stop"></i>
-				<p class="stream-status mb-0"></p>
+				<div class="music-buttons mt-2">
+					<i class="fa fa-arrow-left arrow-prev"></i>
+					<i class="fa fa-pause"></i>
+					<i class="fa fa-play"></i>
+					<i class="fa fa-stop"></i>
+					<i class="fa fa-arrow-right arrow-next"></i>
+				</div>
+				<p class="stream-status mt-2 mb-0"></p>
 				<p class="now-playing mb-1"></p>
 			</div>
-			<div class="form-group socials pt-3">
+			<div class="form-group socials pt-2">
 				<a target="_blank" href="#" class="fa fa-youtube"></a>
 				<a target="_blank" href="#" class="fa fa-soundcloud" style="padding-left: 5px;"></a>
 				<a target="_blank" href="#" class="fa fa-spotify"></a>
@@ -89,7 +93,7 @@
 	}
 
 	.stream-status {
-		font-size: 16px;
+		font-size: 15px;
 	}
 
 	.now-playing {
@@ -123,7 +127,11 @@
 		opacity: 0.7;
 		text-decoration: none;
 	}
-
+	
+	.music-buttons .fa {
+		padding: 0px;
+		width: 10%;
+	}
 	.fa {
 		padding: 12px;
 		font-size: 32px;
