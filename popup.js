@@ -73,7 +73,8 @@ function get_youtube_content() {
     live_stream = youtube_content.streams
     stream_status = now_playing_buttons['play']
   }
-  init_track(stream_status)
+  update_stream_status(stream_status)
+  init_live_stream()
 }
 
 function create_tabs_content() {
@@ -158,25 +159,18 @@ function get_key_by_value(object, value) {
 
 function toggle_video(action) {
   let currentAction = get_key_by_value(now_playing_buttons, $('.stream-status').text().replace('...', ''))
-  if (now_playing_buttons[action] == $('.stream-status').text() || (action == 'pause' && currentAction == 'stop') || !live_stream) return
-  if($.inArray(action,['prev','next']) !== -1){
-    if(action == 'prev' && now_playing_video >=1) now_playing_video -= 1
-    if(action == 'next'&& now_playing_video < live_stream.length) now_playing_video += 1
-    action = 'play'
-  } else {
-    $('.yt_player_iframe').each(function () {
-      this.contentWindow.postMessage(`{"event":"command","func":"${action}Video","args":""}`, '*')
-    })
-  }
-  init_track(now_playing_buttons[action])
+  if (now_playing_buttons[action] == $('.stream-status').text() || (action == 'pause' && currentAction == 'stop') ||  $.inArray(action,['prev','next']) !== -1 || !live_stream) return
+  $('.yt_player_iframe').each(function () {
+    this.contentWindow.postMessage(`{"event":"command","func":"${action}Video","args":""}`, '*')
+  })
+  update_stream_status(now_playing_buttons[action])
 }
 
-function init_track(stream_status){
-  update_stream_status(stream_status)
+function init_live_stream(){
   if (!live_stream) return
-  let video = live_stream[now_playing_video]
-  $('.now-playing').text(video.name.split(' | ')[1])
-  $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${video.videoId}?${jQuery.param(videoParams)}`)
+  let stream = live_stream[0]
+  $('.now-playing').text(stream.name.split(' | ')[1])
+  $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${stream.videoId}?${jQuery.param(videoParams)}`)
 }
 
 function permalinks() {
