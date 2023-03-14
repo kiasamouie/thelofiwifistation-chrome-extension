@@ -175,7 +175,7 @@ function init_track(stream_status){
   update_stream_status(stream_status)
   if (!live_stream) return
   let video = live_stream[now_playing_video]
-  $('.now-playing').text(video.name.split(' | ')[0])
+  $('.now-playing').text(video.name.split(' | ')[1])
   $('.yt_player_iframe').attr('src', `http://www.youtube.com/embed/${video.videoId}?${jQuery.param(videoParams)}`)
 }
 
