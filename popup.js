@@ -3,8 +3,9 @@ $.ajaxSetup({ async: false })
 var socials = {
   youtube: 'https://www.youtube.com/c/THELOFIWIFISTATION',
   soundcloud: 'https://soundcloud.com/thelofiwifistation',
-  spotify: 'https://open.spotify.com/playlist/7AbkW3uVMBclLgt7dG7jS2',
+  tiktok: 'https://www.tiktok.com/@thelofiwifistation',
   instagram: 'https://www.instagram.com/thelofiwifistation',
+  spotify: 'https://open.spotify.com/playlist/7AbkW3uVMBclLgt7dG7jS2',
   twitter: 'https://twitter.com/LofiWifiStation'
 }
 var live_stream = null
