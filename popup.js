@@ -55,8 +55,11 @@ function get_youtube_content() {
   if (!Object.keys(youtube_content).length) {
     $.each(youtube_urls, function (action_tab, action) {
       $.get(socials.youtube + `/${action}`, function (data, status) {
-        var contents = parse_html_response(data, 'var ytInitialData = ').contents.twoColumnBrowseResultsRenderer.tabs[action_tab].tabRenderer.content.richGridRenderer.contents
-        youtube_content[action] = $.map(contents, function (v) {
+        let html = parse_html_response(data, 'var ytInitialData = ')
+        if (!html.contents.twoColumnBrowseResultsRenderer.tabs[action_tab].tabRenderer.content.richGridRenderer) return 
+        var contents = html.contents.twoColumnBrowseResultsRenderer.tabs[action_tab].tabRenderer.content.richGridRenderer.contents
+        youtube_content[action] = $.map(contents, function (v, i) {
+          if (!v.richItemRenderer) return
           let content = v.richItemRenderer.content
           return {
             name: content.hasOwnProperty('videoRenderer') ? content.videoRenderer.title.runs[0].text : content.reelItemRenderer.headline.simpleText,
